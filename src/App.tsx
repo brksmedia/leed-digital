@@ -1,5 +1,7 @@
 import './App.css'
 import { FadeIn, FadeInStagger, FadeInItem } from './components/FadeIn'
+import { SplineScene } from './components/SplineScene'
+import { Spotlight } from './components/Spotlight'
 import { motion } from 'framer-motion'
 import {
   Bot, Landmark, Megaphone, Settings, Terminal, Database, Palette,
@@ -45,47 +47,61 @@ function App() {
       </motion.nav>
 
       {/* ═══════════════════ HERO ═══════════════════ */}
-      <section className="min-h-screen flex flex-col justify-center items-center px-6 md:px-10 relative">
-        {/* Gradient orb */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(77,142,255,0.08)_0%,transparent_70%)] blur-[40px] pointer-events-none" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+      <section className="min-h-screen relative overflow-hidden bg-black/[0.96]">
+        <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center max-w-[900px] relative z-10"
-        >
-          <p className="text-[13px] text-[#4d8eff] font-medium tracking-[0.2em] uppercase mb-8">AI Solutions Development</p>
-          <h1 className="text-[clamp(2.2rem,7vw,5.5rem)] font-black tracking-[-0.04em] text-white leading-[0.95] mb-6">
-            1 person. 7 AI agents.
-          </h1>
-          <h1 className="text-[clamp(2.2rem,7vw,5.5rem)] font-black tracking-[-0.04em] leading-[0.95] mb-10">
-            <span className="bg-gradient-to-r from-[#4d8eff] to-[#7aa8ff] bg-clip-text text-transparent">$100K/month</span>
-            <span className="text-white"> in paid media.</span>
-          </h1>
-          <p className="text-[15px] md:text-lg text-[#666] max-w-lg mx-auto mb-3 leading-relaxed">
-            This is how a real US marketing company operates.
-          </p>
-          <p className="text-lg md:text-xl text-white font-medium mb-14">
-            We build this for you too.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="#proof" className="group px-7 py-3.5 bg-[#4d8eff] text-white font-medium rounded-lg transition-all hover:bg-[#5d96ff] shadow-[0_0_40px_rgba(77,142,255,0.15)] hover:shadow-[0_0_60px_rgba(77,142,255,0.25)] cursor-pointer text-[14px] flex items-center justify-center gap-2">
-              See how it works <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </a>
-            <a href="#contact" className="px-7 py-3.5 text-white/60 hover:text-white font-medium rounded-lg transition-colors cursor-pointer text-[14px] border border-white/[0.08] hover:border-white/[0.15]">
-              Talk to LEED
-            </a>
-          </div>
-        </motion.div>
+        <div className="flex flex-col md:flex-row min-h-screen max-w-[1200px] mx-auto">
+          {/* Left: Text */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="flex-1 flex flex-col justify-center px-6 md:px-10 py-20 md:py-0 relative z-10"
+          >
+            <p className="text-[11px] text-[#4d8eff] font-medium tracking-[0.2em] uppercase mb-6">AI Solutions Development</p>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-[-0.04em] text-white leading-[0.95] mb-4">
+              1 person.<br />7 AI agents.
+            </h1>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-[-0.04em] leading-[0.95] mb-8">
+              <span className="bg-gradient-to-r from-[#4d8eff] to-[#7aa8ff] bg-clip-text text-transparent">$100K/month</span>
+              <br /><span className="text-white">in paid media.</span>
+            </h2>
+            <p className="text-[14px] text-[#666] max-w-md mb-2 leading-relaxed">
+              This is how a real US marketing company operates.
+            </p>
+            <p className="text-base text-white font-medium mb-10">
+              We build this for you too.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a href="#proof" className="group px-6 py-3 bg-[#4d8eff] text-white font-medium rounded-lg transition-all hover:bg-[#5d96ff] shadow-[0_0_40px_rgba(77,142,255,0.15)] hover:shadow-[0_0_60px_rgba(77,142,255,0.25)] cursor-pointer text-[13px] flex items-center justify-center gap-2">
+                See how it works <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </a>
+              <a href="#contact" className="px-6 py-3 text-white/60 hover:text-white font-medium rounded-lg transition-colors cursor-pointer text-[13px] border border-white/[0.08] hover:border-white/[0.15]">
+                Talk to LEED
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Right: Spline 3D */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.6 }}
+            className="flex-1 relative min-h-[400px] md:min-h-0"
+          >
+            <SplineScene
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              className="w-full h-full"
+            />
+          </motion.div>
+        </div>
 
         {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
         >
           <div className="w-5 h-8 rounded-full border border-white/10 flex justify-center pt-1.5">
             <motion.div
