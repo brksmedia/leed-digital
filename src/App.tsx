@@ -1,11 +1,9 @@
 import './App.css'
 import { FadeIn, FadeInStagger, FadeInItem } from './components/FadeIn'
-import { GridBackground } from './components/GridBackground'
-import { HeroGlow } from './components/HeroGlow'
 import { motion } from 'framer-motion'
 import {
   Bot, Landmark, Megaphone, Settings, Terminal, Database, Palette,
-  Shield, FileText, Plug, Layers, Activity, Unlock,
+  Shield, FileText, Plug, Layers, Activity, Unlock, ArrowRight,
 } from 'lucide-react'
 
 const agents = [
@@ -18,128 +16,106 @@ const agents = [
   { Icon: Palette, name: 'CDesO', desc: 'Visual audits, design system, consistency.' },
 ]
 
-const metrics = [
-  { value: '$100K+', label: 'Monthly ad spend' },
-  { value: '30 min', label: 'Monitoring cycles' },
-  { value: '90%', label: 'Manual task reduction' },
-  { value: '1 vs 15', label: 'Person vs typical team' },
-  { value: '24/7', label: 'Anomaly detection' },
-  { value: 'Daily', label: 'Cross-validated reports' },
-]
-
-const painPoints = [
-  { dot: 'bg-dot-red', text: 'Your team spends hours building reports nobody uses to make decisions.' },
-  { dot: 'bg-dot-amber', text: "Decisions are made with yesterday's data — if not last week's." },
-  { dot: 'bg-dot-amber', text: 'Every new hire costs $5-10K/month and takes 3 months to deliver value.' },
-  { dot: 'bg-dot-red', text: "Your operation depends on 3 people who can't get sick at the same time." },
-]
-
-const levels = [
-  { level: '01', name: 'Assistance', desc: 'Responds when you ask. You decide everything.', dim: 'opacity-30' },
-  { level: '02', name: 'Automation', desc: 'Executes repetitive tasks on its own. You supervise.', dim: 'opacity-40' },
-  { level: '03', name: 'Operations', desc: 'Makes decisions within defined rules. You intervene by exception.', dim: 'opacity-60' },
-]
-
-const steps = [
-  { num: '01', name: 'Diagnostic', time: '1 to 2 weeks', desc: "We map your operation. Identify where AI generates real ROI — not where it looks good on a PowerPoint. You get a plan with scope, timeline, and cost.", accent: true },
-  { num: '02', name: 'Build', time: '4 to 8 weeks', desc: 'We develop the agents, integrations, and workflows. You follow progress in real time. Nothing is a black box.', accent: false },
-  { num: '03', name: 'Operate', time: 'Ongoing', desc: 'AI goes into production. We monitor, adjust, expand. The operation improves over time because agents learn from your business data.', accent: false },
-]
-
 const infra = [
-  { Icon: Shield, title: 'Data Isolation', desc: 'Data isolated per client — none of your data is shared.' },
-  { Icon: FileText, title: 'Audit Logs', desc: 'Full log of every decision by every agent — auditable at any time.' },
-  { Icon: Plug, title: 'Any Integration', desc: 'Integrates with any API, database, or tool you already use.' },
-  { Icon: Layers, title: 'Semantic Layer', desc: 'A single source of truth for the entire business.' },
-  { Icon: Activity, title: 'Real-Time Monitoring', desc: 'Problems are detected before they become crises.' },
-  { Icon: Unlock, title: 'No Lock-in', desc: 'You own all the infrastructure. If you leave, you take everything.' },
+  { Icon: Shield, title: 'Data Isolation', desc: 'None of your data is shared.' },
+  { Icon: FileText, title: 'Audit Logs', desc: 'Every agent decision logged.' },
+  { Icon: Plug, title: 'Any Integration', desc: 'Works with your existing stack.' },
+  { Icon: Layers, title: 'Semantic Layer', desc: 'Single source of truth.' },
+  { Icon: Activity, title: 'Real-Time Alerts', desc: 'Problems caught early.' },
+  { Icon: Unlock, title: 'No Lock-in', desc: 'You own everything.' },
 ]
 
 function App() {
   return (
-    <div className="min-h-screen bg-bg text-text-secondary relative">
-      <GridBackground />
+    <div className="min-h-screen bg-[#050505] text-[#888] relative overflow-x-hidden">
 
       {/* Nav */}
       <motion.nav
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="fixed top-0 w-full z-50 bg-bg/60 backdrop-blur-2xl border-b border-border/40"
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="fixed top-0 w-full z-50 bg-[#050505]/70 backdrop-blur-2xl border-b border-white/[0.04]"
       >
-        <div className="flex justify-between items-center px-6 md:px-8 py-4 max-w-6xl mx-auto">
-          <div className="text-sm font-black tracking-[0.08em] text-white uppercase">LEED Digital</div>
-          <a href="#contact" className="hidden md:block bg-accent hover:bg-accent-dim text-white px-5 py-2.5 rounded-md font-semibold text-sm transition-colors cursor-pointer">
-            Talk to LEED
+        <div className="flex justify-between items-center px-6 md:px-10 py-4 max-w-[1200px] mx-auto">
+          <div className="text-[13px] font-semibold tracking-[0.12em] text-white/70 uppercase">LEED Digital</div>
+          <a href="#contact" className="hidden md:flex items-center gap-2 text-[13px] text-white/60 hover:text-white transition-colors cursor-pointer">
+            Get in touch <ArrowRight className="w-3.5 h-3.5" />
           </a>
         </div>
       </motion.nav>
 
-      {/* HERO */}
-      <header className="pt-36 md:pt-48 pb-24 md:pb-32 px-6 md:px-8 max-w-4xl mx-auto text-center relative">
-        <HeroGlow />
+      {/* ═══════════════════ HERO ═══════════════════ */}
+      <section className="min-h-screen flex flex-col justify-center items-center px-6 md:px-10 relative">
+        {/* Gradient orb */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(77,142,255,0.08)_0%,transparent_70%)] blur-[40px] pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center max-w-[900px] relative z-10"
         >
-          <h1 className="text-[2.5rem] leading-[1.05] md:text-6xl lg:text-7xl font-black tracking-[-0.03em] text-white md:leading-[1] mb-8">
-            1 person. 7 AI agents.{' '}
-            <span className="text-accent">$100K/month</span> in paid media.
+          <p className="text-[13px] text-[#4d8eff] font-medium tracking-[0.2em] uppercase mb-8">AI Solutions Development</p>
+          <h1 className="text-[clamp(2.2rem,7vw,5.5rem)] font-black tracking-[-0.04em] text-white leading-[0.95] mb-6">
+            1 person. 7 AI agents.
           </h1>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <p className="text-base md:text-lg text-text-secondary max-w-xl mx-auto mb-2 leading-relaxed">
+          <h1 className="text-[clamp(2.2rem,7vw,5.5rem)] font-black tracking-[-0.04em] leading-[0.95] mb-10">
+            <span className="bg-gradient-to-r from-[#4d8eff] to-[#7aa8ff] bg-clip-text text-transparent">$100K/month</span>
+            <span className="text-white"> in paid media.</span>
+          </h1>
+          <p className="text-[15px] md:text-lg text-[#666] max-w-lg mx-auto mb-3 leading-relaxed">
             This is how a real US marketing company operates.
           </p>
-          <p className="text-lg md:text-xl text-white font-bold mb-12">
+          <p className="text-lg md:text-xl text-white font-medium mb-14">
             We build this for you too.
           </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="#proof" className="group px-7 py-3.5 bg-[#4d8eff] text-white font-medium rounded-lg transition-all hover:bg-[#5d96ff] shadow-[0_0_40px_rgba(77,142,255,0.15)] hover:shadow-[0_0_60px_rgba(77,142,255,0.25)] cursor-pointer text-[14px] flex items-center justify-center gap-2">
+              See how it works <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </a>
+            <a href="#contact" className="px-7 py-3.5 text-white/60 hover:text-white font-medium rounded-lg transition-colors cursor-pointer text-[14px] border border-white/[0.08] hover:border-white/[0.15]">
+              Talk to LEED
+            </a>
+          </div>
         </motion.div>
+
+        {/* Scroll indicator */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.9 }}
-          className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-10"
-        >
-          <a href="#proof" className="px-7 py-3.5 bg-accent text-white font-semibold rounded-md transition-all shadow-[0_0_30px_rgba(77,142,255,0.2)] hover:shadow-[0_0_40px_rgba(77,142,255,0.35)] hover:scale-[1.02] cursor-pointer text-sm">
-            See how it works
-          </a>
-          <a href="#contact" className="px-7 py-3.5 bg-transparent border border-border text-white font-semibold rounded-md hover:bg-surface-high hover:border-border/80 transition-all cursor-pointer text-sm">
-            Talk to LEED
-          </a>
-        </motion.div>
-        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 1.2 }}
-          className="text-xs text-text-muted tracking-wide"
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
         >
-          AI solutions development — from a single API integration to a full operating system.
-        </motion.p>
-      </header>
+          <div className="w-5 h-8 rounded-full border border-white/10 flex justify-center pt-1.5">
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="w-1 h-1 rounded-full bg-white/30"
+            />
+          </div>
+        </motion.div>
+      </section>
 
-      {/* PROBLEM */}
-      <section className="py-20 md:py-28 px-6 md:px-8 bg-surface/50">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+      {/* ═══════════════════ PROBLEM ═══════════════════ */}
+      <section className="py-28 md:py-36 px-6 md:px-10">
+        <div className="max-w-[1200px] mx-auto">
           <FadeIn>
-            <h2 className="text-3xl md:text-[3.2rem] md:leading-[1.1] font-black tracking-[-0.02em] text-white mb-4">
-              You don't have a technology problem.
+            <h2 className="text-[clamp(1.8rem,4vw,3.5rem)] font-black tracking-[-0.03em] text-white leading-[1.05] max-w-2xl mb-16">
+              You don't have a technology problem. <span className="text-[#333]">You have an operations problem.</span>
             </h2>
-            <p className="text-xl md:text-2xl font-black tracking-tight text-text-muted/40 leading-tight">
-              You have an operations problem.
-            </p>
           </FadeIn>
-          <FadeInStagger className="space-y-3">
-            {painPoints.map((item, i) => (
+          <FadeInStagger className="grid sm:grid-cols-2 gap-3">
+            {[
+              { dot: '#ef4444', text: 'Your team spends hours building reports nobody uses to make decisions.' },
+              { dot: '#f59e0b', text: "Decisions are made with yesterday's data — if not last week's." },
+              { dot: '#f59e0b', text: 'Every new hire costs $5-10K/month and takes 3 months to deliver value.' },
+              { dot: '#ef4444', text: "Your operation depends on 3 people who can't get sick at the same time." },
+            ].map((item, i) => (
               <FadeInItem key={i}>
-                <div className="p-4 md:p-5 bg-bg/80 rounded-lg border border-border/50 flex items-start gap-4 hover:border-border transition-colors cursor-default">
-                  <div className={`w-2 h-2 rounded-full ${item.dot} mt-2 shrink-0`} />
-                  <p className="text-white/85 text-[13px] md:text-sm font-medium leading-relaxed">{item.text}</p>
+                <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-white/[0.1] transition-colors flex items-start gap-4 cursor-default">
+                  <div className="w-1.5 h-1.5 rounded-full mt-2 shrink-0" style={{ background: item.dot }} />
+                  <p className="text-[14px] text-[#999] leading-relaxed">{item.text}</p>
                 </div>
               </FadeInItem>
             ))}
@@ -147,134 +123,159 @@ function App() {
         </div>
       </section>
 
-      {/* REFRAME N1-N4 */}
-      <section className="py-20 md:py-28 px-6 md:px-8">
-        <div className="max-w-6xl mx-auto">
-          <FadeIn className="mb-12">
-            <h2 className="text-3xl md:text-[3.2rem] md:leading-[1.1] font-black text-white tracking-[-0.02em] mb-3">
+      {/* ═══════════════════ N1-N4 LEVELS ═══════════════════ */}
+      <section className="py-28 md:py-36 px-6 md:px-10 border-t border-white/[0.04]">
+        <div className="max-w-[1200px] mx-auto">
+          <FadeIn className="mb-14">
+            <p className="text-[13px] text-[#4d8eff] font-medium tracking-[0.2em] uppercase mb-4">Autonomy Framework</p>
+            <h2 className="text-[clamp(1.8rem,4vw,3.5rem)] font-black tracking-[-0.03em] text-white leading-[1.05]">
               Most companies use AI at Level 1.
             </h2>
-            <p className="text-xl md:text-2xl font-black text-accent">We operate at Level 4.</p>
+            <h2 className="text-[clamp(1.8rem,4vw,3.5rem)] font-black tracking-[-0.03em] text-[#4d8eff] leading-[1.05]">
+              We operate at Level 4.
+            </h2>
           </FadeIn>
-          <FadeInStagger className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-            {levels.map((item, i) => (
-              <FadeInItem key={i}>
-                <div className={`p-5 md:p-6 bg-surface border border-border/40 rounded-lg ${item.dim}`}>
-                  <div className="text-[10px] font-semibold text-text-muted mb-3 tracking-[0.15em] uppercase">Level {item.level}</div>
-                  <h4 className="text-base font-black text-white mb-2">{item.name}</h4>
-                  <p className="text-xs text-text-muted leading-relaxed">{item.desc}</p>
+
+          <FadeIn>
+            <div className="grid grid-cols-4 gap-0 border border-white/[0.06] rounded-xl overflow-hidden">
+              {[
+                { n: '01', name: 'Assistance', desc: 'Responds when you ask', who: 'You decide everything', opacity: 'opacity-25' },
+                { n: '02', name: 'Automation', desc: 'Executes repetitive tasks', who: 'You supervise', opacity: 'opacity-35' },
+                { n: '03', name: 'Operations', desc: 'Decisions within rules', who: 'You intervene by exception', opacity: 'opacity-55' },
+              ].map((l, i) => (
+                <div key={i} className={`p-6 md:p-8 border-r border-white/[0.04] ${l.opacity}`}>
+                  <div className="text-[10px] text-[#555] tracking-[0.2em] uppercase mb-4">Level {l.n}</div>
+                  <h4 className="text-sm font-bold text-white mb-1">{l.name}</h4>
+                  <p className="text-[11px] text-[#555] mb-3">{l.desc}</p>
+                  <p className="text-[10px] text-[#444]">{l.who}</p>
                 </div>
-              </FadeInItem>
-            ))}
-            <FadeInItem>
-              <div className="p-5 md:p-6 bg-accent/[0.04] border-2 border-accent/50 rounded-lg relative shadow-[0_0_60px_rgba(77,142,255,0.06)] hover:shadow-[0_0_80px_rgba(77,142,255,0.1)] transition-shadow">
-                <div className="absolute -top-2.5 right-4 px-2.5 py-0.5 bg-accent text-white text-[9px] font-bold uppercase rounded tracking-wider">We are here</div>
-                <div className="text-[10px] font-bold text-accent mb-3 tracking-[0.15em] uppercase">Level 04</div>
-                <h4 className="text-lg font-black text-white mb-2">Autonomous Management</h4>
-                <p className="text-xs text-accent/60 leading-relaxed">Runs entire areas of the business. You set the strategy.</p>
+              ))}
+              <div className="p-6 md:p-8 bg-[#4d8eff]/[0.06] border-l-2 border-[#4d8eff]/30 relative">
+                <div className="absolute top-3 right-3 px-2 py-0.5 bg-[#4d8eff] text-white text-[8px] font-bold uppercase rounded tracking-wider">Active</div>
+                <div className="text-[10px] text-[#4d8eff] tracking-[0.2em] uppercase mb-4">Level 04</div>
+                <h4 className="text-sm font-bold text-white mb-1">Autonomous</h4>
+                <p className="text-[11px] text-[#4d8eff]/60 mb-3">Runs entire business areas</p>
+                <p className="text-[10px] text-[#4d8eff]/40">You set the strategy</p>
               </div>
-            </FadeInItem>
-          </FadeInStagger>
-          <FadeIn delay={0.2}>
-            <p className="mt-8 text-text-muted text-sm max-w-2xl">
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.1}>
+            <p className="mt-8 text-[13px] text-[#444] max-w-xl">
               The difference between using AI and operating with AI is the same difference between having an intern and having a C-level.
             </p>
           </FadeIn>
         </div>
       </section>
 
-      {/* PROOF — C-SYSTEM */}
-      <section className="py-20 md:py-28 px-6 md:px-8 bg-surface/50" id="proof">
-        <div className="max-w-6xl mx-auto">
+      {/* ═══════════════════ PROOF — C-SYSTEM ═══════════════════ */}
+      <section className="py-28 md:py-36 px-6 md:px-10 border-t border-white/[0.04]" id="proof">
+        <div className="max-w-[1200px] mx-auto">
           <FadeIn>
-            <h2 className="text-3xl md:text-[3.2rem] md:leading-[1.1] font-black text-white mb-3 tracking-[-0.02em]">
-              7 AI agents running a real company.{' '}
-              <span className="text-accent">24 hours. 7 days.</span>
+            <p className="text-[13px] text-[#4d8eff] font-medium tracking-[0.2em] uppercase mb-4">Proof of Concept</p>
+            <h2 className="text-[clamp(1.8rem,4vw,3.5rem)] font-black tracking-[-0.03em] text-white leading-[1.05] mb-2">
+              7 AI agents. One real company.
             </h2>
-            <p className="text-text-secondary mb-12 text-sm max-w-2xl">
-              C-System runs our own US performance marketing company. Not a prototype. In production.
+            <p className="text-lg text-[#444] mb-16 max-w-xl">
+              C-System runs our US performance marketing operation. Not a prototype — in production since 2025.
             </p>
           </FadeIn>
 
-          {/* Agents - card layout */}
+          {/* Bento grid - asymmetric */}
           <FadeIn delay={0.1}>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2 mb-2">
-              {agents.map((agent, i) => (
-                <div key={i} className="bg-bg border border-border/40 rounded-lg p-4 md:p-5 hover:border-accent/30 transition-colors group cursor-default">
-                  <agent.Icon className="w-5 h-5 text-accent/50 group-hover:text-accent mb-3 transition-colors" strokeWidth={1.5} />
-                  <h5 className="font-black text-white text-xs mb-1.5">{agent.name}</h5>
-                  <p className="text-[10px] text-text-muted leading-snug">{agent.desc}</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-2">
+              {/* Big metric */}
+              <div className="col-span-2 row-span-2 rounded-xl bg-gradient-to-br from-[#4d8eff]/[0.08] to-transparent border border-[#4d8eff]/[0.12] p-8 md:p-10 flex flex-col justify-between">
+                <div>
+                  <p className="text-[11px] text-[#4d8eff] tracking-[0.15em] uppercase mb-2">Monthly Ad Spend</p>
+                  <div className="text-[clamp(3rem,8vw,5rem)] font-black text-white tracking-tighter leading-none">$100K+</div>
                 </div>
-              ))}
+                <p className="text-[13px] text-[#555] mt-6">Managed entirely by AI agents — budget allocation, bid optimization, anomaly detection.</p>
+              </div>
+              {/* Metrics */}
+              <div className="rounded-xl bg-white/[0.02] border border-white/[0.05] p-6 flex flex-col justify-between">
+                <p className="text-[10px] text-[#555] tracking-[0.15em] uppercase">Team Size</p>
+                <div className="text-4xl font-black text-white mt-3">1<span className="text-[#333] text-2xl ml-1">vs 15</span></div>
+              </div>
+              <div className="rounded-xl bg-white/[0.02] border border-white/[0.05] p-6 flex flex-col justify-between">
+                <p className="text-[10px] text-[#555] tracking-[0.15em] uppercase">Task Reduction</p>
+                <div className="text-4xl font-black text-white mt-3">90<span className="text-[#333] text-2xl">%</span></div>
+              </div>
+              <div className="rounded-xl bg-white/[0.02] border border-white/[0.05] p-6 flex flex-col justify-between">
+                <p className="text-[10px] text-[#555] tracking-[0.15em] uppercase">Monitoring</p>
+                <div className="text-4xl font-black text-white mt-3">24/7</div>
+              </div>
+              <div className="rounded-xl bg-white/[0.02] border border-white/[0.05] p-6 flex flex-col justify-between">
+                <p className="text-[10px] text-[#555] tracking-[0.15em] uppercase">Reports</p>
+                <div className="text-4xl font-black text-white mt-3">Daily</div>
+              </div>
             </div>
           </FadeIn>
 
-          {/* Metrics */}
+          {/* Agent cards */}
           <FadeIn delay={0.2}>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mb-10">
-              {metrics.map((m, i) => (
-                <div key={i} className="bg-bg border border-border/40 rounded-lg p-5 md:p-6 hover:border-accent/30 transition-colors cursor-default">
-                  <div className="text-2xl md:text-3xl font-black text-accent mb-1">{m.value}</div>
-                  <p className="text-[10px] text-text-muted uppercase font-semibold tracking-wider">{m.label}</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2 mt-2">
+              {agents.map((agent, i) => (
+                <div key={i} className="rounded-xl bg-white/[0.02] border border-white/[0.05] p-4 hover:border-[#4d8eff]/20 transition-all group cursor-default">
+                  <agent.Icon className="w-4 h-4 text-[#333] group-hover:text-[#4d8eff] mb-3 transition-colors" strokeWidth={1.5} />
+                  <h5 className="font-bold text-white text-[11px] mb-1">{agent.name}</h5>
+                  <p className="text-[9px] text-[#444] leading-snug">{agent.desc}</p>
                 </div>
               ))}
             </div>
-          </FadeIn>
-
-          <FadeIn delay={0.3}>
-            <p className="text-white/80 text-sm font-medium">
-              This is not a pitch deck slide. This is the operation running the business today.
-            </p>
           </FadeIn>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section className="py-20 md:py-28 px-6 md:px-8">
-        <div className="max-w-6xl mx-auto">
+      {/* ═══════════════════ HOW IT WORKS ═══════════════════ */}
+      <section className="py-28 md:py-36 px-6 md:px-10 border-t border-white/[0.04]">
+        <div className="max-w-[1200px] mx-auto">
           <FadeIn>
-            <h2 className="text-3xl md:text-[3.2rem] md:leading-[1.1] font-black text-white tracking-[-0.02em] mb-3">
+            <p className="text-[13px] text-[#4d8eff] font-medium tracking-[0.2em] uppercase mb-4">Process</p>
+            <h2 className="text-[clamp(1.8rem,4vw,3.5rem)] font-black tracking-[-0.03em] text-white leading-[1.05] mb-2">
               From first conversation to AI operating.
             </h2>
-            <p className="text-xl md:text-2xl font-black text-text-muted/40 mb-14">Weeks, not months.</p>
+            <p className="text-xl font-bold text-[#333] mb-16">Weeks, not months.</p>
           </FadeIn>
-          <FadeInStagger className="grid md:grid-cols-3 gap-8 md:gap-10">
-            {steps.map((step, i) => (
+          <FadeInStagger className="grid md:grid-cols-3 gap-6">
+            {[
+              { num: '01', name: 'Diagnostic', time: '1–2 weeks', desc: "We map your operation. Identify where AI generates real ROI — not where it looks good on a PowerPoint. You get a plan with scope, timeline, and cost.", active: true },
+              { num: '02', name: 'Build', time: '4–8 weeks', desc: 'We develop the agents, integrations, and workflows. You follow progress in real time. Nothing is a black box.', active: false },
+              { num: '03', name: 'Operate', time: 'Ongoing', desc: 'AI goes into production. We monitor, adjust, expand. The operation improves over time because agents learn from your business data.', active: false },
+            ].map((step, i) => (
               <FadeInItem key={i}>
-                <div className="group">
-                  <div className={`w-11 h-11 ${step.accent ? 'bg-accent shadow-[0_0_20px_rgba(77,142,255,0.2)]' : 'bg-surface border border-border'} text-white font-black flex items-center justify-center mb-5 rounded-lg text-sm`}>
-                    {step.num}
-                  </div>
-                  <h4 className="text-lg font-black text-white mb-2">{step.name}</h4>
-                  <p className="text-[11px] text-accent font-semibold mb-3 uppercase tracking-wider">{step.time}</p>
-                  <p className="text-sm text-text-secondary leading-relaxed">{step.desc}</p>
+                <div className={`rounded-xl p-7 md:p-8 h-full ${step.active ? 'bg-[#4d8eff]/[0.06] border border-[#4d8eff]/[0.15]' : 'bg-white/[0.02] border border-white/[0.05]'}`}>
+                  <div className={`text-[11px] font-bold tracking-[0.15em] uppercase mb-6 ${step.active ? 'text-[#4d8eff]' : 'text-[#444]'}`}>Step {step.num}</div>
+                  <h4 className="text-xl font-black text-white mb-1">{step.name}</h4>
+                  <p className={`text-[11px] font-semibold uppercase tracking-wider mb-4 ${step.active ? 'text-[#4d8eff]/60' : 'text-[#444]'}`}>{step.time}</p>
+                  <p className="text-[13px] text-[#666] leading-relaxed">{step.desc}</p>
                 </div>
               </FadeInItem>
             ))}
           </FadeInStagger>
           <FadeIn delay={0.2}>
-            <p className="mt-12 text-sm text-text-muted max-w-2xl">
+            <p className="mt-8 text-[13px] text-[#444] max-w-xl">
               The scope can be a single API integration or a complete system with multiple agents. The diagnostic determines the right size for you.
             </p>
           </FadeIn>
         </div>
       </section>
 
-      {/* INFRASTRUCTURE */}
-      <section className="py-20 md:py-28 px-6 md:px-8 bg-surface/50">
-        <div className="max-w-6xl mx-auto">
+      {/* ═══════════════════ INFRASTRUCTURE ═══════════════════ */}
+      <section className="py-28 md:py-36 px-6 md:px-10 border-t border-white/[0.04]">
+        <div className="max-w-[1200px] mx-auto">
           <FadeIn>
-            <h2 className="text-3xl md:text-[2.8rem] md:leading-[1.1] font-black text-white mb-10 tracking-[-0.02em]">
-              Built to run in production. Not in a demo.
+            <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-black tracking-[-0.03em] text-white leading-[1.05] mb-12">
+              Built to run in production.<br /><span className="text-[#333]">Not in a demo.</span>
             </h2>
           </FadeIn>
-          <FadeInStagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <FadeInStagger className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
             {infra.map((item, i) => (
               <FadeInItem key={i}>
-                <div className="p-5 md:p-6 bg-bg border border-border/40 rounded-lg hover:border-accent/30 transition-all group cursor-default">
-                  <item.Icon className="w-5 h-5 text-accent/40 group-hover:text-accent mb-3 transition-colors" strokeWidth={1.5} />
-                  <h5 className="text-sm font-bold text-white mb-1.5">{item.title}</h5>
-                  <p className="text-xs text-text-muted leading-relaxed">{item.desc}</p>
+                <div className="rounded-xl bg-white/[0.02] border border-white/[0.05] p-5 hover:border-white/[0.1] transition-all group cursor-default">
+                  <item.Icon className="w-4 h-4 text-[#333] group-hover:text-[#4d8eff] mb-3 transition-colors" strokeWidth={1.5} />
+                  <h5 className="text-[11px] font-bold text-white mb-1">{item.title}</h5>
+                  <p className="text-[10px] text-[#444] leading-relaxed">{item.desc}</p>
                 </div>
               </FadeInItem>
             ))}
@@ -282,34 +283,34 @@ function App() {
         </div>
       </section>
 
-      {/* WHO WE ARE */}
-      <section className="py-24 md:py-28 px-6 md:px-8 max-w-3xl mx-auto text-center">
-        <FadeIn>
-          <div className="w-20 h-20 rounded-full bg-surface border border-border/60 mx-auto mb-5 flex items-center justify-center">
-            <span className="text-xl font-black text-text-muted/60">LB</span>
-          </div>
-          <h3 className="text-xl font-black text-white mb-1">Lucas Brinks</h3>
-          <p className="text-[10px] text-accent font-semibold uppercase tracking-[0.2em] mb-5">Founder, LEED Digital</p>
-          <p className="text-sm text-text-muted">Based in Brazil. Global operation.</p>
-        </FadeIn>
+      {/* ═══════════════════ FOUNDER ═══════════════════ */}
+      <section className="py-24 px-6 md:px-10 border-t border-white/[0.04]">
+        <div className="max-w-[600px] mx-auto text-center">
+          <FadeIn>
+            <div className="w-16 h-16 rounded-full bg-white/[0.03] border border-white/[0.06] mx-auto mb-4 flex items-center justify-center">
+              <span className="text-sm font-bold text-[#444]">LB</span>
+            </div>
+            <h3 className="text-lg font-bold text-white mb-0.5">Lucas Brinks</h3>
+            <p className="text-[10px] text-[#4d8eff] font-medium uppercase tracking-[0.2em] mb-4">Founder</p>
+            <p className="text-[13px] text-[#444]">Based in Brazil. Global operation.</p>
+          </FadeIn>
+        </div>
       </section>
 
-      {/* FINAL CTA */}
-      <section className="py-24 md:py-32 px-6 md:px-8 text-center relative" id="contact">
-        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-accent/[0.03] rounded-full blur-[100px]" />
+      {/* ═══════════════════ CTA ═══════════════════ */}
+      <section className="py-32 md:py-40 px-6 md:px-10 text-center relative border-t border-white/[0.04]" id="contact">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-[#4d8eff]/[0.04] rounded-full blur-[100px]" />
         </div>
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-2xl mx-auto relative z-10">
           <FadeIn>
-            <h2 className="text-3xl md:text-5xl font-black text-white mb-8 tracking-[-0.03em] leading-[1.1]">
+            <h2 className="text-[clamp(1.8rem,4.5vw,3.5rem)] font-black text-white mb-8 tracking-[-0.03em] leading-[1.05]">
               Your operation can run differently.
-              <br />
-              Let us show you how.
             </h2>
-            <a href="#" className="inline-block px-8 py-4 bg-accent text-white font-semibold text-base rounded-md transition-all shadow-[0_0_30px_rgba(77,142,255,0.2)] hover:shadow-[0_0_50px_rgba(77,142,255,0.35)] hover:scale-[1.02] mb-6 cursor-pointer">
-              Book a diagnostic
+            <a href="#" className="group inline-flex items-center gap-2 px-8 py-4 bg-[#4d8eff] text-white font-medium rounded-lg transition-all shadow-[0_0_40px_rgba(77,142,255,0.15)] hover:shadow-[0_0_60px_rgba(77,142,255,0.3)] hover:bg-[#5d96ff] cursor-pointer text-[15px] mb-6">
+              Book a diagnostic <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
-            <p className="text-sm text-text-muted max-w-md mx-auto leading-relaxed">
+            <p className="text-[13px] text-[#444] max-w-sm mx-auto leading-relaxed">
               No commitment. 30 minutes. You walk away with a clear map of what AI can operate in your business.
             </p>
           </FadeIn>
@@ -317,12 +318,12 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border/30 py-8 px-6 md:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto">
-          <div className="text-[10px] font-bold text-white/40 mb-3 md:mb-0 uppercase tracking-[0.15em]">LEED Digital</div>
-          <div className="flex gap-6 text-[11px] text-text-muted">
-            <a href="#" className="hover:text-accent transition-colors cursor-pointer">LinkedIn</a>
-            <a href="mailto:info@leed.digital" className="hover:text-accent transition-colors cursor-pointer">info@leed.digital</a>
+      <footer className="border-t border-white/[0.04] py-8 px-6 md:px-10">
+        <div className="flex flex-col md:flex-row justify-between items-center max-w-[1200px] mx-auto">
+          <div className="text-[10px] font-medium text-[#333] mb-3 md:mb-0 uppercase tracking-[0.15em]">LEED Digital © 2025</div>
+          <div className="flex gap-6 text-[11px] text-[#444]">
+            <a href="#" className="hover:text-white transition-colors cursor-pointer">LinkedIn</a>
+            <a href="mailto:info@leed.digital" className="hover:text-white transition-colors cursor-pointer">info@leed.digital</a>
           </div>
         </div>
       </footer>
