@@ -1,0 +1,148 @@
+export const translations = {
+  en: {
+    nav: { cta: 'Get in touch' },
+    hero: {
+      label: 'AI Solutions Development',
+      headline: 'We build AI solutions for real business problems.',
+      sub: "From custom agents to full operating systems. We solve what's actually costing you time and money.",
+      cta1: 'See how it works',
+      cta2: 'Talk to LEED',
+    },
+    problem: {
+      headline: 'AI without a system is just a faster way to do the wrong thing.',
+      points: [
+        'You connected 10 tools. None of them talk to each other.',
+        'You automated a process. The process was already wrong.',
+        'You have AI generating reports. Nobody reads them.',
+        'You replaced a person with a bot. Now you manage the bot instead.',
+      ],
+    },
+    levels: {
+      label: 'Autonomy Framework',
+      headline1: 'Most companies use AI at Level 1.',
+      headline2: 'We operate at Level 4.',
+      items: [
+        { name: 'Assistance', desc: 'Responds when you ask', who: 'You decide everything' },
+        { name: 'Automation', desc: 'Executes repetitive tasks', who: 'You supervise' },
+        { name: 'Operations', desc: 'Decisions within rules', who: 'You intervene by exception' },
+      ],
+      l4: { name: 'Autonomous', desc: 'Runs entire business areas', who: 'You set the strategy' },
+      badge: 'Active',
+      closing: 'The difference between using AI and operating with AI is the same difference between having an intern and having a C-level.',
+    },
+    system: {
+      label: 'Architecture',
+      headline: 'How the system works.',
+      sub: 'Every business has different problems. Every system we build is different. But the architecture is always the same.',
+      principles: [
+        { title: 'Specialized agents', desc: 'Each agent solves one thing well. Built for your specific operation, not generic templates.' },
+        { title: 'Shared intelligence', desc: 'All agents see the same data. No silos, no conflicting information, no blind spots.' },
+        { title: 'Self-monitoring', desc: 'The system watches itself. Anomalies are detected before they become problems.' },
+        { title: 'Continuous learning', desc: 'Gets better with your data. The longer it runs, the more precise it gets.' },
+      ],
+    },
+    process: {
+      label: 'Process',
+      headline: 'From first conversation to AI operating.',
+      sub: 'Weeks, not months.',
+      steps: [
+        { name: 'Diagnostic', time: '1 to 2 weeks', desc: "We map your operation. Identify where AI generates real ROI, not where it looks good on a PowerPoint. You get a plan with scope, timeline, and cost." },
+        { name: 'Build', time: '4 to 8 weeks', desc: 'We develop the agents, integrations, and workflows. You follow progress in real time. Nothing is a black box.' },
+        { name: 'Operate', time: 'Ongoing', desc: 'AI goes into production. We monitor, adjust, expand. The operation improves over time because agents learn from your business data.' },
+      ],
+      note: 'The scope can be a single API integration or a complete system with multiple agents. The diagnostic determines the right size for you.',
+    },
+    contact: {
+      headline: 'Get in touch.',
+      sub: "No commitment. Tell us what's costing you time and money. We'll tell you if AI can fix it.",
+      bullets: [
+        '30-minute diagnostic call',
+        'Clear map of what AI can operate',
+        'Scope, timeline, and cost estimate',
+      ],
+      form: {
+        name: 'Name',
+        namePlaceholder: 'Your name',
+        email: 'Email',
+        emailPlaceholder: 'you@company.com',
+        message: "What's the problem?",
+        messagePlaceholder: 'Tell us about the operation you want to improve',
+        submit: 'Book a diagnostic',
+      },
+    },
+  },
+  pt: {
+    nav: { cta: 'Fale conosco' },
+    hero: {
+      label: 'Desenvolvimento de Soluções com AI',
+      headline: 'Construímos soluções de AI para problemas reais de negócio.',
+      sub: 'De agentes customizados a sistemas operacionais completos. Resolvemos o que realmente custa tempo e dinheiro.',
+      cta1: 'Veja como funciona',
+      cta2: 'Fale com a LEED',
+    },
+    problem: {
+      headline: 'AI sem sistema é só um jeito mais rápido de fazer a coisa errada.',
+      points: [
+        'Você conectou 10 ferramentas. Nenhuma conversa com a outra.',
+        'Você automatizou um processo. O processo já estava errado.',
+        'Você tem AI gerando relatórios. Ninguém lê.',
+        'Você substituiu uma pessoa por um bot. Agora você gerencia o bot.',
+      ],
+    },
+    levels: {
+      label: 'Framework de Autonomia',
+      headline1: 'A maioria das empresas usa AI no Nível 1.',
+      headline2: 'Nós operamos no Nível 4.',
+      items: [
+        { name: 'Assistência', desc: 'Responde quando você pergunta', who: 'Você decide tudo' },
+        { name: 'Automação', desc: 'Executa tarefas repetitivas', who: 'Você supervisiona' },
+        { name: 'Operação', desc: 'Decide dentro de regras', who: 'Você intervém por exceção' },
+      ],
+      l4: { name: 'Autônomo', desc: 'Opera áreas inteiras do negócio', who: 'Você define a estratégia' },
+      badge: 'Ativo',
+      closing: 'A diferença entre usar AI e operar com AI é a mesma diferença entre ter um estagiário e ter um diretor.',
+    },
+    system: {
+      label: 'Arquitetura',
+      headline: 'Como o sistema funciona.',
+      sub: 'Cada negócio tem problemas diferentes. Cada sistema que construímos é diferente. Mas a arquitetura é sempre a mesma.',
+      principles: [
+        { title: 'Agentes especializados', desc: 'Cada agente resolve uma coisa bem. Construído pra sua operação específica, não templates genéricos.' },
+        { title: 'Inteligência compartilhada', desc: 'Todos os agentes veem os mesmos dados. Sem silos, sem informação conflitante, sem pontos cegos.' },
+        { title: 'Auto-monitoramento', desc: 'O sistema vigia a si mesmo. Anomalias são detectadas antes de virar problema.' },
+        { title: 'Aprendizado contínuo', desc: 'Melhora com seus dados. Quanto mais roda, mais preciso fica.' },
+      ],
+    },
+    process: {
+      label: 'Processo',
+      headline: 'Da primeira conversa à AI operando.',
+      sub: 'Semanas, não meses.',
+      steps: [
+        { name: 'Diagnóstico', time: '1 a 2 semanas', desc: 'Mapeamos sua operação. Identificamos onde AI gera retorno real, não onde fica bonito no PowerPoint. Você recebe um plano com escopo, prazo e custo.' },
+        { name: 'Construção', time: '4 a 8 semanas', desc: 'Desenvolvemos os agentes, integrações e fluxos. Você acompanha o progresso em tempo real. Nada é caixa preta.' },
+        { name: 'Operação', time: 'Contínuo', desc: 'AI entra em produção. Monitoramos, ajustamos, expandimos. A operação melhora com o tempo porque os agentes aprendem com os dados do seu negócio.' },
+      ],
+      note: 'O escopo pode ser uma única integração de API ou um sistema completo com múltiplos agentes. O diagnóstico define o tamanho certo pra você.',
+    },
+    contact: {
+      headline: 'Fale conosco.',
+      sub: 'Sem compromisso. Nos conte o que está custando tempo e dinheiro. A gente diz se AI resolve.',
+      bullets: [
+        'Diagnóstico de 30 minutos',
+        'Mapa claro do que AI pode operar',
+        'Escopo, prazo e estimativa de custo',
+      ],
+      form: {
+        name: 'Nome',
+        namePlaceholder: 'Seu nome',
+        email: 'Email',
+        emailPlaceholder: 'voce@empresa.com',
+        message: 'Qual o problema?',
+        messagePlaceholder: 'Conte sobre a operação que você quer melhorar',
+        submit: 'Agendar diagnóstico',
+      },
+    },
+  },
+} as const
+
+export type Lang = keyof typeof translations
