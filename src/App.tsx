@@ -47,17 +47,33 @@ function App() {
       </motion.nav>
 
       {/* ═══════════════════ HERO ═══════════════════ */}
-      <section className="min-h-screen relative overflow-hidden bg-black/[0.96]">
+      <section className="h-screen relative overflow-hidden">
         <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
 
-        <div className="flex flex-col md:flex-row min-h-screen max-w-[1200px] mx-auto">
-          {/* Left: Text */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="flex-1 flex flex-col justify-center px-6 md:px-10 py-20 md:py-0 relative z-10"
-          >
+        {/* Spline 3D — full background */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5, delay: 0.4 }}
+          className="absolute inset-0 z-0"
+        >
+          <SplineScene
+            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+            className="w-full h-full"
+          />
+        </motion.div>
+
+        {/* Gradient overlay for text readability */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/80 via-black/50 to-transparent pointer-events-none" />
+
+        {/* Text content */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10 h-full flex flex-col justify-center px-6 md:px-10 max-w-[1200px] mx-auto"
+        >
+          <div className="max-w-xl">
             <p className="text-[11px] text-[#4d8eff] font-medium tracking-[0.2em] uppercase mb-6">AI Solutions Development</p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-[-0.04em] text-white leading-[0.95] mb-4">
               1 person.<br />7 AI agents.
@@ -66,7 +82,7 @@ function App() {
               <span className="bg-gradient-to-r from-[#4d8eff] to-[#7aa8ff] bg-clip-text text-transparent">$100K/month</span>
               <br /><span className="text-white">in paid media.</span>
             </h2>
-            <p className="text-[14px] text-[#666] max-w-md mb-2 leading-relaxed">
+            <p className="text-[14px] text-[#999] max-w-md mb-2 leading-relaxed">
               This is how a real US marketing company operates.
             </p>
             <p className="text-base text-white font-medium mb-10">
@@ -80,21 +96,8 @@ function App() {
                 Talk to LEED
               </a>
             </div>
-          </motion.div>
-
-          {/* Right: Spline 3D */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="flex-1 relative min-h-[400px] md:min-h-0"
-          >
-            <SplineScene
-              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              className="w-full h-full"
-            />
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
 
         {/* Scroll indicator */}
         <motion.div
