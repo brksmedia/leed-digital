@@ -260,6 +260,19 @@ export function V2Homepage() {
               )
             })}
           </FadeInStagger>
+
+          <FadeIn delay={0.1}>
+            <p className="mt-10 text-[15px] text-white/80 font-medium">
+              {lang === 'pt'
+                ? 'Se você não sabe quanto sua AI gera de retorno, ela não está gerando.'
+                : "If you can't measure your AI's return, it isn't generating one."}
+            </p>
+            <p className="mt-2 text-[12px] text-[#666]">
+              {lang === 'pt'
+                ? '61% das empresas que usam AI não conseguem medir impacto financeiro. (McKinsey, 2025)'
+                : '61% of companies using AI cannot measure financial impact. (McKinsey, 2025)'}
+            </p>
+          </FadeIn>
         </div>
       </section>
 
