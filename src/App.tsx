@@ -5,6 +5,7 @@ import './App.css'
 import { FadeIn, FadeInStagger, FadeInItem } from './components/FadeIn'
 import { SplineScene } from './components/SplineScene'
 import { Spotlight } from './components/Spotlight'
+import { Assessment } from './components/Assessment'
 import { motion } from 'framer-motion'
 import { Bot, Database, Layers, Activity, ArrowRight } from 'lucide-react'
 import { translations, type Lang } from './i18n'
@@ -41,6 +42,10 @@ function App() {
   useEffect(() => {
     setLangURL(lang)
   }, [lang])
+
+  if (window.location.pathname === '/assessment') {
+    return <Assessment />
+  }
 
   return (
     <div className="min-h-screen bg-[#050505] text-[#888] relative overflow-x-hidden">
