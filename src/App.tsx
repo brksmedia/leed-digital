@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import { FadeIn, FadeInStagger, FadeInItem } from './components/FadeIn'
 import { SplineScene } from './components/SplineScene'
@@ -16,9 +16,26 @@ const levelMeta = [
 const principleIcons = [Bot, Database, Activity, Layers]
 const dotColors = ['#ef4444', '#f59e0b', '#f59e0b', '#ef4444']
 
+function getLangFromURL(): Lang {
+  const params = new URLSearchParams(window.location.search)
+  const keys = Array.from(params.keys())
+  if (keys.includes('pt-br')) return 'pt'
+  if (keys.includes('en-us')) return 'en'
+  return 'en'
+}
+
+function setLangURL(lang: Lang) {
+  const param = lang === 'pt' ? 'pt-br' : 'en-us'
+  window.history.replaceState({}, '', `?${param}`)
+}
+
 function App() {
-  const [lang, setLang] = useState<Lang>('en')
+  const [lang, setLang] = useState<Lang>(getLangFromURL)
   const t = translations[lang]
+
+  useEffect(() => {
+    setLangURL(lang)
+  }, [lang])
 
   return (
     <div className="min-h-screen bg-[#050505] text-[#888] relative overflow-x-hidden">
@@ -265,7 +282,13 @@ function App() {
                 e.preventDefault()
                 const form = e.currentTarget
                 const data = new FormData(form)
+                const name = (data.get('name') as string || '').trim()
+                const email = (data.get('email') as string || '').trim()
+                if (!name || !email) return
                 fetch('https://formspree.io/f/mwvwaypr', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+                if (typeof gtag === 'function') {
+                  gtag('event', 'conversion', { 'send_to': 'AW-16851840618/F-r4CKe8lZgcEOrcyuM-' })
+                }
                 window.open('https://wa.me/5511947276831?text=Ol%C3%A1%2C%20tenho%20interesse%20em%20solu%C3%A7%C3%B5es%20de%20AI%20para%20meu%20neg%C3%B3cio.%20Acabei%20de%20enviar%20meus%20dados%20pelo%20site', '_blank')
               }}>
                 <div>
