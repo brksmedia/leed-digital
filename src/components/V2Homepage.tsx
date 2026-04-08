@@ -601,16 +601,16 @@ export function V2Homepage() {
                   }
                 }}>
                   <div>
-                    <label className="text-[11px] text-[#888] uppercase tracking-[0.15em] block mb-2 font-semibold">{t.contact.form.name}</label>
+                    <label className="text-[11px] text-[#bbb] uppercase tracking-[0.15em] block mb-2 font-semibold">{t.contact.form.name}</label>
                     <input type="text" name="name" required className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-5 py-3.5 text-white text-[14px] placeholder-[#444] focus:border-[#4d8eff]/50 focus:outline-none transition-colors" placeholder={t.contact.form.namePlaceholder} />
                   </div>
                   <div>
-                    <label className="text-[11px] text-[#888] uppercase tracking-[0.15em] block mb-2 font-semibold">{t.contact.form.email}</label>
+                    <label className="text-[11px] text-[#bbb] uppercase tracking-[0.15em] block mb-2 font-semibold">{t.contact.form.email}</label>
                     <input type="email" name="email" required className={`w-full bg-white/[0.03] border rounded-xl px-5 py-3.5 text-white text-[14px] placeholder-[#444] focus:outline-none transition-colors ${emailError ? 'border-red-500/60 focus:border-red-500' : 'border-white/[0.08] focus:border-[#4d8eff]/50'}`} placeholder={t.contact.form.emailPlaceholder} onChange={() => emailError && setEmailError(false)} />
                     {emailError && <p className="text-red-400 text-xs mt-1.5">{t.contact.form.invalidEmail}</p>}
                   </div>
                   <div>
-                    <label className="text-[11px] text-[#888] uppercase tracking-[0.15em] block mb-2 font-semibold">{t.contact.form.message}</label>
+                    <label className="text-[11px] text-[#bbb] uppercase tracking-[0.15em] block mb-2 font-semibold">{t.contact.form.message}</label>
                     <textarea rows={4} name="message" required className="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-5 py-3.5 text-white text-[14px] placeholder-[#444] focus:border-[#4d8eff]/50 focus:outline-none transition-colors resize-none" placeholder={t.contact.form.messagePlaceholder} />
                   </div>
                   {formStatus === 'error' && <p className="text-red-400 text-[13px]">{t.contact.form.error}</p>}
