@@ -229,7 +229,7 @@ export function V2Homepage() {
       </section>
 
       {/* ═══════════════════ PROBLEM ═══════════════════ */}
-      <section className="py-20 md:py-40 px-6 md:px-10" id="v2-problem">
+      <section className="py-16 md:py-28 px-6 md:px-10" id="v2-problem">
         <div className="max-w-[1200px] mx-auto">
           <FadeIn>
             <p className="text-[12px] text-[#c49a4a] font-semibold tracking-[0.2em] uppercase mb-4">
@@ -264,7 +264,7 @@ export function V2Homepage() {
       </section>
 
       {/* ═══════════════════ LEVELS ═══════════════════ */}
-      <section className="py-20 md:py-40 px-6 md:px-10 bg-[#0c0c0c]" id="v2-levels">
+      <section className="py-16 md:py-28 px-6 md:px-10 bg-[#0c0c0c]" id="v2-levels">
         <div className="max-w-[1200px] mx-auto">
           <FadeIn className="mb-14 md:mb-20 md:text-right">
             <p className="text-[12px] text-[#4d8eff] font-semibold tracking-[0.2em] uppercase mb-4">{t.levels.label}</p>
@@ -280,6 +280,11 @@ export function V2Homepage() {
             >
               {t.levels.headline2}
             </h2>
+            <p className="text-[12px] text-[#666] mt-4 md:text-right leading-relaxed">
+              {lang === 'pt'
+                ? 'McKinsey, 2025 (1.993 empresas, 105 países): 65% ainda estão em fase de experimentação. Menos de 10% escalaram AI agents em produção.'
+                : 'McKinsey, 2025 (1,993 companies, 105 countries): 65% are still in the experimentation phase. Less than 10% have scaled AI agents to production.'}
+            </p>
           </FadeIn>
 
           <FadeIn>
@@ -322,7 +327,7 @@ export function V2Homepage() {
       </section>
 
       {/* ═══════════════════ SYSTEM ═══════════════════ */}
-      <section className="py-20 md:py-40 px-6 md:px-10" id="v2-system">
+      <section className="py-16 md:py-28 px-6 md:px-10" id="v2-system">
         <div className="max-w-[1200px] mx-auto">
           <FadeIn>
             <p className="text-[12px] text-[#4d8eff] font-semibold tracking-[0.2em] uppercase mb-4">{t.system.label}</p>
@@ -332,7 +337,7 @@ export function V2Homepage() {
             >
               {t.system.headline}
             </h2>
-            <p className="text-[16px] md:text-[18px] text-[#888] mb-10 md:mb-16 max-w-2xl leading-relaxed">
+            <p className="text-[16px] md:text-[18px] text-[#888] mb-10 md:mb-16 leading-relaxed">
               {t.system.sub}
             </p>
           </FadeIn>
@@ -398,7 +403,7 @@ export function V2Homepage() {
       </section>
 
       {/* ═══════════════════ PROCESS ═══════════════════ */}
-      <section className="py-20 md:py-40 px-6 md:px-10 bg-[#0c0c0c]" id="v2-process">
+      <section className="py-16 md:py-28 px-6 md:px-10 bg-[#0c0c0c]" id="v2-process">
         <div className="max-w-[1200px] mx-auto">
           <FadeIn className="md:text-right mb-14 md:mb-20">
             <p className="text-[12px] text-[#4d8eff] font-semibold tracking-[0.2em] uppercase mb-4">{t.process.label}</p>
@@ -442,7 +447,7 @@ export function V2Homepage() {
       </section>
 
       {/* ═══════════════════ SOCIAL PROOF ═══════════════════ */}
-      <section className="py-20 md:py-40 px-6 md:px-10 relative" id="v2-proof">
+      <section className="py-16 md:py-28 px-6 md:px-10 relative" id="v2-proof">
         {/* Subtle background */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#4d8eff]/[0.02] to-transparent pointer-events-none" />
 
@@ -452,29 +457,29 @@ export function V2Homepage() {
               {lang === 'pt' ? 'Na Pratica' : 'In Practice'}
             </p>
             <h2
-              className="text-[clamp(2rem,4.5vw,3.8rem)] tracking-[-0.03em] text-white leading-[1.1] mb-6 max-w-2xl"
+              className="text-[clamp(2rem,4.5vw,3.8rem)] tracking-[-0.03em] text-white leading-[1.1] mb-6"
               style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
             >
               {lang === 'pt'
-                ? 'Nao vendemos teoria. Operamos o que construimos.'
+                ? 'Não vendemos teoria. Operamos o que construímos.'
                 : "We don't sell theory. We operate what we build."}
             </h2>
-            <p className="text-[16px] md:text-[18px] text-[#888] mb-14 md:mb-20 max-w-2xl leading-relaxed">
+            <p className="text-[16px] md:text-[18px] text-[#888] mb-14 md:mb-20 leading-relaxed">
               {lang === 'pt'
-                ? 'A LEED Digital opera seu proprio negocio com um sistema de 7 agentes AI autonomos. O mesmo framework que oferecemos aos clientes.'
-                : 'LEED Digital operates its own business with a system of 7 autonomous AI agents. The same framework we offer to clients.'}
+                ? 'A LEED Digital opera com um sistema AI que cobre 7 domínios do negócio. Briefings, alertas, relatórios, cruzamento de dados. Tudo automático.'
+                : 'LEED Digital operates with an AI system covering 7 business domains. Briefings, alerts, reports, data cross-referencing. All automatic.'}
             </p>
           </FadeIn>
 
           <FadeInStagger className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5 mb-14 md:mb-20">
             {(lang === 'pt' ? [
-              { metric: '7', label: 'Agentes AI', desc: 'Operando autonomamente em tempo real' },
-              { metric: '24/7', label: 'Monitoramento', desc: 'Auto-deteccao de anomalias sem intervencao humana' },
-              { metric: '3', label: 'Negocios', desc: 'Gerenciados simultaneamente pelo mesmo sistema' },
+              { metric: '7', label: 'Domínios AI', desc: 'Financeiro, marketing, operações, dados, tecnologia, design e estratégia. Um sistema único.' },
+              { metric: '24/7', label: 'Monitoramento', desc: 'Seu negócio sendo vigiado enquanto você dorme. Alerta antes do café.' },
+              { metric: '160+', label: 'Regras aprendidas', desc: 'Cada erro vira regra. Cada correção vira inteligência. O sistema não esquece.' },
             ] : [
-              { metric: '7', label: 'AI Agents', desc: 'Operating autonomously in real time' },
-              { metric: '24/7', label: 'Monitoring', desc: 'Self-detecting anomalies without human intervention' },
-              { metric: '3', label: 'Businesses', desc: 'Managed simultaneously by the same system' },
+              { metric: '7', label: 'AI Domains', desc: 'Finance, marketing, operations, data, technology, design, and strategy. One single system.' },
+              { metric: '24/7', label: 'Monitoring', desc: 'Your business watched while you sleep. Alerts before your morning coffee.' },
+              { metric: '160+', label: 'Learned rules', desc: 'Each mistake becomes a rule. Each correction becomes intelligence. The system never forgets.' },
             ]).map((item, i) => (
               <FadeInItem key={i}>
                 <div className="p-7 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#c49a4a]/20 transition-colors cursor-default h-full">
@@ -495,15 +500,15 @@ export function V2Homepage() {
           <FadeIn>
             <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
               {(lang === 'pt' ? [
-                { title: 'Briefing diario automatico', desc: 'CEO recebe relatorio financeiro + decisoes pendentes todas as manhas. Gerado por AI, nao por humano.' },
-                { title: 'Alertas em tempo real', desc: 'Sistema monitora performance de campanhas e notifica o time quando metricas saem do normal. Sem ninguem verificando dashboards.' },
-                { title: 'Integracao multi-plataforma', desc: 'ClickBank, Meta Ads, Taboola, Supabase, Slack — todos os dados centralizados e cruzados automaticamente.' },
-                { title: 'Decisoes autonomas', desc: 'Agentes tomam decisoes operacionais dentro de regras. Escalam pro humano apenas quando necessario.' },
+                { title: 'Briefing diário às 6h', desc: 'Relatório financeiro + decisões pendentes + anomalias. Pronto quando o café fica pronto.' },
+                { title: 'Alerta em minutos, não dias', desc: 'Campanha derrapou? MSN caiu? Gasto explodiu? Você sabe em 15 minutos. Não no fechamento do mês.' },
+                { title: 'Zero trabalho manual em dados', desc: 'Meta Ads, Taboola, ClickBank, RedTrack, Supabase, Slack. Tudo cruzado por API. Sem planilha, sem export manual.' },
+                { title: 'Relatórios e alertas autônomos', desc: 'O sistema gera, cruza e notifica. Decisões operacionais passam por revisão humana. AI executa. Você decide.' },
               ] : [
-                { title: 'Automated daily briefing', desc: 'CEO receives financial report + pending decisions every morning. Generated by AI, not by a human.' },
-                { title: 'Real-time alerts', desc: 'System monitors campaign performance and notifies the team when metrics deviate. No one checking dashboards.' },
-                { title: 'Multi-platform integration', desc: 'ClickBank, Meta Ads, Taboola, Supabase, Slack — all data centralized and cross-referenced automatically.' },
-                { title: 'Autonomous decisions', desc: 'Agents make operational decisions within rules. Escalate to humans only when necessary.' },
+                { title: 'Daily briefing at 6 AM', desc: 'Financial report + pending decisions + anomalies. Ready when your coffee is ready.' },
+                { title: 'Alerts in minutes, not days', desc: 'Campaign derailed? Metrics dropped? Spend spiked? You know in 15 minutes. Not at month-end close.' },
+                { title: 'Zero manual data work', desc: 'Meta Ads, Taboola, ClickBank, RedTrack, Supabase, Slack. All cross-referenced via API. No spreadsheets, no manual exports.' },
+                { title: 'Autonomous reports and alerts', desc: 'The system generates, cross-references, and notifies. Operational decisions go through human review. AI executes. You decide.' },
               ]).map((item, i) => (
                 <div key={i} className="p-6 rounded-2xl bg-white/[0.015] border border-white/[0.05] hover:border-white/[0.1] transition-colors cursor-default">
                   <h4 className="text-[14px] font-bold text-white mb-2">{item.title}</h4>
@@ -516,7 +521,7 @@ export function V2Homepage() {
       </section>
 
       {/* ═══════════════════ CONTACT ═══════════════════ */}
-      <section className="py-20 md:py-40 px-6 md:px-10 bg-[#0c0c0c]" id="v2-contact">
+      <section className="py-16 md:py-28 px-6 md:px-10 bg-[#0c0c0c]" id="v2-contact">
         <div className="max-w-[1200px] mx-auto">
           <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
             <FadeIn>
