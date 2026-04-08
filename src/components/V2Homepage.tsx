@@ -455,6 +455,11 @@ export function V2Homepage() {
             <p className="mt-10 text-[13px] text-[#777] leading-relaxed">
               {t.process.note}
             </p>
+            <p className="mt-4 text-[12px] text-[#666]">
+              {lang === 'pt'
+                ? 'BCG, 2024: 74% das empresas não conseguem extrair ROI de AI. O diagnóstico existe pra você não ser uma delas.'
+                : "BCG, 2024: 74% of companies fail to extract ROI from AI. The diagnostic exists so you're not one of them."}
+            </p>
           </FadeIn>
         </div>
       </section>
