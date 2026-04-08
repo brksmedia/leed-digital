@@ -269,8 +269,8 @@ export function V2Homepage() {
             </p>
             <p className="mt-2 text-[12px] text-[#666]">
               {lang === 'pt'
-                ? '61% das empresas que usam AI não conseguem medir impacto financeiro. (McKinsey, 2025)'
-                : '61% of companies using AI cannot measure financial impact. (McKinsey, 2025)'}
+                ? '95% dos pilotos de AI generativa falham em gerar impacto no P&L. (MIT, 2025)'
+                : '95% of generative AI pilots fail to deliver P&L impact. (MIT, 2025)'}
             </p>
           </FadeIn>
         </div>
