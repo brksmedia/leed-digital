@@ -21,7 +21,7 @@ function getLangFromURL(): Lang {
   const keys = Array.from(params.keys())
   if (keys.includes('pt-br')) return 'pt'
   if (keys.includes('en-us')) return 'en'
-  return 'en'
+  return 'pt'
 }
 
 function setLangURL(lang: Lang) {
