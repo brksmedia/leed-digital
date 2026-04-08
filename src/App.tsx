@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+
+declare function gtag(...args: unknown[]): void
 import './App.css'
 import { FadeIn, FadeInStagger, FadeInItem } from './components/FadeIn'
 import { SplineScene } from './components/SplineScene'
@@ -31,6 +33,9 @@ function setLangURL(lang: Lang) {
 
 function App() {
   const [lang, setLang] = useState<Lang>(getLangFromURL)
+  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+  const [emailError, setEmailError] = useState(false)
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   const t = translations[lang]
 
   useEffect(() => {
@@ -278,35 +283,52 @@ function App() {
             </FadeIn>
 
             <FadeIn delay={0.1}>
-              <form className="space-y-4" onSubmit={(e) => {
-                e.preventDefault()
-                const form = e.currentTarget
-                const data = new FormData(form)
-                const name = (data.get('name') as string || '').trim()
-                const email = (data.get('email') as string || '').trim()
-                if (!name || !email) return
-                fetch('https://formspree.io/f/mwvwaypr', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
-                if (typeof gtag === 'function') {
-                  gtag('event', 'conversion', { 'send_to': 'AW-16851840618/F-r4CKe8lZgcEOrcyuM-' })
-                }
-                window.open('https://wa.me/5511947276831?text=Ol%C3%A1%2C%20tenho%20interesse%20em%20solu%C3%A7%C3%B5es%20de%20AI%20para%20meu%20neg%C3%B3cio.%20Acabei%20de%20enviar%20meus%20dados%20pelo%20site', '_blank')
-              }}>
-                <div>
-                  <label className="text-[11px] text-[#555] uppercase tracking-[0.15em] block mb-2">{t.contact.form.name}</label>
-                  <input type="text" name="name" required className="w-full bg-white/[0.03] border border-white/[0.08] rounded-lg px-4 py-3 text-white text-sm placeholder-[#333] focus:border-[#4d8eff]/50 focus:outline-none transition-colors" placeholder={t.contact.form.namePlaceholder} />
+              {formStatus === 'success' ? (
+                <div className="flex items-center justify-center min-h-[280px]">
+                  <p className="text-[#4d8eff] text-sm font-medium">{t.contact.form.success}</p>
                 </div>
-                <div>
-                  <label className="text-[11px] text-[#555] uppercase tracking-[0.15em] block mb-2">{t.contact.form.email}</label>
-                  <input type="email" name="email" required className="w-full bg-white/[0.03] border border-white/[0.08] rounded-lg px-4 py-3 text-white text-sm placeholder-[#333] focus:border-[#4d8eff]/50 focus:outline-none transition-colors" placeholder={t.contact.form.emailPlaceholder} />
-                </div>
-                <div>
-                  <label className="text-[11px] text-[#555] uppercase tracking-[0.15em] block mb-2">{t.contact.form.message}</label>
-                  <textarea rows={4} name="message" required className="w-full bg-white/[0.03] border border-white/[0.08] rounded-lg px-4 py-3 text-white text-sm placeholder-[#333] focus:border-[#4d8eff]/50 focus:outline-none transition-colors resize-none" placeholder={t.contact.form.messagePlaceholder} />
-                </div>
-                <button type="submit" className="group w-full flex items-center justify-center gap-2 px-8 py-4 bg-[#4d8eff] text-white font-medium rounded-lg transition-all shadow-[0_0_40px_rgba(77,142,255,0.15)] hover:shadow-[0_0_60px_rgba(77,142,255,0.3)] hover:bg-[#5d96ff] cursor-pointer text-[14px]">
-                  {t.contact.form.submit} <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                </button>
-              </form>
+              ) : (
+                <form className="space-y-4" onSubmit={async (e) => {
+                  e.preventDefault()
+                  const form = e.currentTarget
+                  const data = new FormData(form)
+                  const name = (data.get('name') as string || '').trim()
+                  const email = (data.get('email') as string || '').trim()
+                  if (!name || !email) return
+                  if (!emailRegex.test(email)) { setEmailError(true); return }
+                  setEmailError(false)
+                  setFormStatus('sending')
+                  try {
+                    const res = await fetch('https://formspree.io/f/mwvwaypr', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
+                    if (!res.ok) throw new Error()
+                    if (typeof gtag === 'function') {
+                      gtag('event', 'conversion', { 'send_to': 'AW-16851840618/F-r4CKe8lZgcEOrcyuM-' })
+                    }
+                    setFormStatus('success')
+                    window.open('https://wa.me/5511947276831?text=Ol%C3%A1%2C%20tenho%20interesse%20em%20solu%C3%A7%C3%B5es%20de%20AI%20para%20meu%20neg%C3%B3cio.%20Acabei%20de%20enviar%20meus%20dados%20pelo%20site', '_blank')
+                  } catch {
+                    setFormStatus('error')
+                  }
+                }}>
+                  <div>
+                    <label className="text-[11px] text-[#555] uppercase tracking-[0.15em] block mb-2">{t.contact.form.name}</label>
+                    <input type="text" name="name" required className="w-full bg-white/[0.03] border border-white/[0.08] rounded-lg px-4 py-3 text-white text-sm placeholder-[#333] focus:border-[#4d8eff]/50 focus:outline-none transition-colors" placeholder={t.contact.form.namePlaceholder} />
+                  </div>
+                  <div>
+                    <label className="text-[11px] text-[#555] uppercase tracking-[0.15em] block mb-2">{t.contact.form.email}</label>
+                    <input type="email" name="email" required className={`w-full bg-white/[0.03] border rounded-lg px-4 py-3 text-white text-sm placeholder-[#333] focus:outline-none transition-colors ${emailError ? 'border-red-500/60 focus:border-red-500' : 'border-white/[0.08] focus:border-[#4d8eff]/50'}`} placeholder={t.contact.form.emailPlaceholder} onChange={() => emailError && setEmailError(false)} />
+                    {emailError && <p className="text-red-400 text-xs mt-1">{t.contact.form.invalidEmail}</p>}
+                  </div>
+                  <div>
+                    <label className="text-[11px] text-[#555] uppercase tracking-[0.15em] block mb-2">{t.contact.form.message}</label>
+                    <textarea rows={4} name="message" required className="w-full bg-white/[0.03] border border-white/[0.08] rounded-lg px-4 py-3 text-white text-sm placeholder-[#333] focus:border-[#4d8eff]/50 focus:outline-none transition-colors resize-none" placeholder={t.contact.form.messagePlaceholder} />
+                  </div>
+                  {formStatus === 'error' && <p className="text-red-400 text-xs">{t.contact.form.error}</p>}
+                  <button type="submit" disabled={formStatus === 'sending'} className="group w-full flex items-center justify-center gap-2 px-8 py-4 bg-[#4d8eff] text-white font-medium rounded-lg transition-all shadow-[0_0_40px_rgba(77,142,255,0.15)] hover:shadow-[0_0_60px_rgba(77,142,255,0.3)] hover:bg-[#5d96ff] cursor-pointer text-[14px] disabled:opacity-50 disabled:cursor-not-allowed">
+                    {formStatus === 'sending' ? t.contact.form.sending : t.contact.form.submit} {formStatus !== 'sending' && <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />}
+                  </button>
+                </form>
+              )}
             </FadeIn>
           </div>
         </div>
