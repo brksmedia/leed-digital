@@ -61,7 +61,7 @@ export function V2Homepage() {
       ]
 
   return (
-    <div className="min-h-screen bg-[#080808] relative overflow-x-hidden" style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
+    <div className="min-h-screen bg-[#080808] relative overflow-x-hidden" style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}>
 
       {/* ═══════════════════ NAV ═══════════════════ */}
       <motion.nav
@@ -189,8 +189,8 @@ export function V2Homepage() {
             </p>
 
             <h1
-              className="text-[clamp(2.5rem,7vw,5.5rem)] tracking-[-0.035em] text-white leading-[1.0] mb-8"
-              style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
+              className="text-[clamp(2.5rem,7vw,5.5rem)] font-bold tracking-[-0.035em] text-white leading-[1.0] mb-8"
+              style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
             >
               {t.hero.headline}
             </h1>
@@ -237,7 +237,7 @@ export function V2Homepage() {
             </p>
             <h2
               className="text-[clamp(2rem,4.5vw,3.8rem)] tracking-[-0.03em] text-white leading-[1.1] max-w-3xl mb-14 md:mb-20"
-              style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
+              style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
             >
               {t.problem.headline}
             </h2>
@@ -270,13 +270,13 @@ export function V2Homepage() {
             <p className="text-[12px] text-[#4d8eff] font-semibold tracking-[0.2em] uppercase mb-4">{t.levels.label}</p>
             <h2
               className="text-[clamp(2rem,4.5vw,3.8rem)] tracking-[-0.03em] text-white leading-[1.1]"
-              style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
+              style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
             >
               {t.levels.headline1}
             </h2>
             <h2
               className="text-[clamp(2rem,4.5vw,3.8rem)] tracking-[-0.03em] text-[#4d8eff] leading-[1.1]"
-              style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
+              style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
             >
               {t.levels.headline2}
             </h2>
@@ -314,7 +314,7 @@ export function V2Homepage() {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <p className="mt-10 text-[14px] text-[#777] leading-relaxed md:text-right italic" style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}>
+            <p className="mt-10 text-[14px] text-[#777] leading-relaxed md:text-right italic">
               "{t.levels.closing}"
             </p>
           </FadeIn>
@@ -328,7 +328,7 @@ export function V2Homepage() {
             <p className="text-[12px] text-[#4d8eff] font-semibold tracking-[0.2em] uppercase mb-4">{t.system.label}</p>
             <h2
               className="text-[clamp(2rem,4.5vw,3.8rem)] tracking-[-0.03em] text-white leading-[1.1] mb-3"
-              style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
+              style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
             >
               {t.system.headline}
             </h2>
@@ -404,13 +404,13 @@ export function V2Homepage() {
             <p className="text-[12px] text-[#4d8eff] font-semibold tracking-[0.2em] uppercase mb-4">{t.process.label}</p>
             <h2
               className="text-[clamp(2rem,4.5vw,3.8rem)] tracking-[-0.03em] text-white leading-[1.1] mb-3"
-              style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
+              style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
             >
               {t.process.headline}
             </h2>
             <p
-              className="text-[clamp(1.2rem,2.5vw,1.8rem)] text-[#4d8eff]/60 font-light"
-              style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
+              className="text-[clamp(1.2rem,2.5vw,1.8rem)] text-[#4d8eff]/60 font-medium"
+              style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
             >
               {t.process.sub}
             </p>
@@ -453,7 +453,7 @@ export function V2Homepage() {
             </p>
             <h2
               className="text-[clamp(2rem,4.5vw,3.8rem)] tracking-[-0.03em] text-white leading-[1.1] mb-6 max-w-2xl"
-              style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
+              style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
             >
               {lang === 'pt'
                 ? 'Nao vendemos teoria. Operamos o que construimos.'
@@ -479,8 +479,8 @@ export function V2Homepage() {
               <FadeInItem key={i}>
                 <div className="p-7 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#c49a4a]/20 transition-colors cursor-default h-full">
                   <div
-                    className="text-[clamp(2.5rem,5vw,3.5rem)] font-light text-white mb-1 tracking-[-0.03em]"
-                    style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
+                    className="text-[clamp(2.5rem,5vw,3.5rem)] font-bold text-white mb-1 tracking-[-0.03em]"
+                    style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                   >
                     {item.metric}
                   </div>
@@ -522,7 +522,7 @@ export function V2Homepage() {
             <FadeIn>
               <h2
                 className="text-[clamp(2rem,4.5vw,3.8rem)] tracking-[-0.03em] text-white leading-[1.1] mb-5"
-                style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
+                style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
               >
                 {t.contact.headline}
               </h2>
