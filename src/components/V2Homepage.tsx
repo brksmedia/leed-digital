@@ -266,7 +266,7 @@ export function V2Homepage() {
       {/* ═══════════════════ LEVELS ═══════════════════ */}
       <section className="py-16 md:py-28 px-6 md:px-10 bg-[#0c0c0c]" id="v2-levels">
         <div className="max-w-[1200px] mx-auto">
-          <FadeIn className="mb-14 md:mb-20 md:text-right">
+          <FadeIn className="mb-8 md:mb-12 md:text-right">
             <p className="text-[12px] text-[#4d8eff] font-semibold tracking-[0.2em] uppercase mb-4">{t.levels.label}</p>
             <h2
               className="text-[clamp(2rem,4.5vw,3.8rem)] tracking-[-0.03em] text-white leading-[1.1]"
