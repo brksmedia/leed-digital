@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FadeIn, FadeInStagger, FadeInItem } from './FadeIn'
+import { SplineScene } from './SplineScene'
 import { motion } from 'framer-motion'
 import {
   Bot, Database, Layers, Activity, ArrowRight, ArrowUpRight,
@@ -158,16 +159,32 @@ export function V2Homepage() {
 
       {/* ═══════════════════ HERO ═══════════════════ */}
       <section className="min-h-screen relative flex items-center overflow-hidden">
-        {/* Background glow */}
-        <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[70%] rounded-full bg-[#4d8eff]/[0.04] blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[50%] rounded-full bg-[#4d8eff]/[0.02] blur-[100px] pointer-events-none" />
+        {/* Spline 3D — right side */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5, delay: 0.4 }}
+          className="absolute top-0 right-[-15%] w-[90%] md:w-[65%] h-full z-0 hidden md:block"
+          style={{
+            maskImage: 'radial-gradient(ellipse 55% 65% at 85% 50%, black 35%, transparent 100%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 55% 65% at 85% 50%, black 35%, transparent 100%)',
+          }}
+        >
+          <SplineScene scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" className="w-full h-full" />
+        </motion.div>
+
+        {/* Gradient overlay to ensure text readability */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#080808] via-[#080808]/70 to-transparent pointer-events-none" />
+
+        {/* Background glow (visible on mobile where Spline is hidden) */}
+        <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[70%] rounded-full bg-[#4d8eff]/[0.04] blur-[120px] pointer-events-none md:hidden" />
 
         <div className="relative z-10 w-full px-6 md:px-10 max-w-[1200px] mx-auto pt-32 md:pt-0">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-3xl"
+            className="max-w-2xl"
           >
             <p className="text-[12px] text-[#4d8eff] font-semibold tracking-[0.2em] uppercase mb-6">
               {t.hero.label}
