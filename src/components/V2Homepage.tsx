@@ -164,7 +164,7 @@ export function V2Homepage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 0.4 }}
-          className="absolute top-0 right-[-15%] w-[90%] md:w-[65%] h-full z-0 hidden md:block"
+          className="absolute top-0 right-[-30%] sm:right-[-15%] w-[120%] sm:w-[90%] md:w-[65%] h-full z-0"
           style={{
             maskImage: 'radial-gradient(ellipse 55% 65% at 85% 50%, black 35%, transparent 100%)',
             WebkitMaskImage: 'radial-gradient(ellipse 55% 65% at 85% 50%, black 35%, transparent 100%)',
@@ -176,8 +176,6 @@ export function V2Homepage() {
         {/* Gradient overlay to ensure text readability */}
         <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#080808] via-[#080808]/70 to-transparent pointer-events-none" />
 
-        {/* Background glow (visible on mobile where Spline is hidden) */}
-        <div className="absolute top-[-20%] right-[-10%] w-[70%] h-[70%] rounded-full bg-[#4d8eff]/[0.04] blur-[120px] pointer-events-none md:hidden" />
 
         <div className="relative z-10 w-full px-6 md:px-10 max-w-[1200px] mx-auto pt-32 md:pt-0">
           <motion.div
