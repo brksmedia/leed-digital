@@ -37,7 +37,7 @@ const STEPS: Step[] = [
     subtitle: 'Contexto da operacao',
     fields: [
       { name: 'descricao', label: 'O que a empresa faz?', type: 'textarea', required: true, placeholder: 'Descreva em 1-2 frases' },
-      { name: 'pessoas', label: 'Quantas pessoas na operacao?', type: 'radio', required: false, options: ['1-5', '6-20', '21-50', '50+'] },
+      { name: 'pessoas', label: 'Quantas pessoas na operacao?', type: 'radio', required: true, options: ['1-5', '6-20', '21-50', '50+'] },
       { name: 'faturamento', label: 'Faixa de faturamento mensal', type: 'radio', required: false, options: ['Ate R$50k', 'R$50k - R$200k', 'R$200k - R$1M', 'R$1M+', 'Prefiro nao dizer'] },
     ],
   },
@@ -45,9 +45,9 @@ const STEPS: Step[] = [
     title: 'Ferramentas',
     subtitle: 'Maturidade tecnologica',
     fields: [
-      { name: 'ferramentas', label: 'Quais ferramentas/sistemas usam no dia a dia?', type: 'checkbox', required: false, options: ['Planilhas (Google Sheets / Excel)', 'ERP (SAP, Omie, Bling, etc)', 'CRM (HubSpot, Pipedrive, etc)', 'Automacao (n8n, Zapier, Make)', 'Sistema proprio', 'WhatsApp como ferramenta de trabalho', 'Outro'] },
-      { name: 'dados', label: 'Onde moram os dados mais importantes?', type: 'radio', required: false, options: ['Planilhas', 'Banco de dados', 'Sistema do fornecedor', 'Na cabeca de alguem', 'Espalhado em varios lugares'] },
-      { name: 'integracoes', label: 'As integracoes entre sistemas sao automaticas ou manuais?', type: 'radio', required: false, options: ['Tudo automatico', 'Maioria automatico', 'Metade e metade', 'Maioria manual', 'Tudo manual'] },
+      { name: 'ferramentas', label: 'Quais ferramentas/sistemas usam no dia a dia?', type: 'checkbox', required: true, options: ['Planilhas (Google Sheets / Excel)', 'ERP (SAP, Omie, Bling, etc)', 'CRM (HubSpot, Pipedrive, etc)', 'Automacao (n8n, Zapier, Make)', 'Sistema proprio', 'WhatsApp como ferramenta de trabalho', 'Outro'] },
+      { name: 'dados', label: 'Onde moram os dados mais importantes?', type: 'radio', required: true, options: ['Planilhas', 'Banco de dados', 'Sistema do fornecedor', 'Na cabeca de alguem', 'Espalhado em varios lugares'] },
+      { name: 'integracoes', label: 'As integracoes entre sistemas sao automaticas ou manuais?', type: 'radio', required: true, options: ['Tudo automatico', 'Maioria automatico', 'Metade e metade', 'Maioria manual', 'Tudo manual'] },
     ],
   },
   {
@@ -56,8 +56,8 @@ const STEPS: Step[] = [
     fields: [
       { name: 'repetitiva', label: 'Qual a tarefa mais repetitiva que consome tempo da equipe?', type: 'textarea', required: true },
       { name: 'perda', label: 'Onde voces perdem dinheiro por erro, atraso ou retrabalho?', type: 'textarea', required: true },
-      { name: 'dependencia', label: 'Tem algum processo que depende de UMA pessoa especifica?', type: 'radio', required: false, options: ['Sim, varios', 'Sim, um ou dois', 'Nao'] },
-      { name: 'tentativa', label: 'Ja tentaram resolver com alguma ferramenta ou consultoria?', type: 'radio', required: false, options: ['Sim, funcionou parcialmente', 'Sim, nao funcionou', 'Nao, nunca tentamos'] },
+      { name: 'dependencia', label: 'Tem algum processo que depende de UMA pessoa especifica?', type: 'radio', required: true, options: ['Sim, varios', 'Sim, um ou dois', 'Nao'] },
+      { name: 'tentativa', label: 'Ja tentaram resolver com alguma ferramenta ou consultoria?', type: 'radio', required: true, options: ['Sim, funcionou parcialmente', 'Sim, nao funcionou', 'Nao, nunca tentamos'] },
     ],
   },
   {
@@ -65,7 +65,7 @@ const STEPS: Step[] = [
     subtitle: 'Timing e prioridade',
     fields: [
       { name: 'urgencia', label: 'De 1 a 10, quao urgente e resolver isso?', type: 'rating', required: true },
-      { name: 'decisor', label: 'Quem decide a contratacao?', type: 'radio', required: false, options: ['Eu decido sozinho', 'Eu + socio/diretor', 'Preciso aprovar com diretoria'] },
+      { name: 'decisor', label: 'Quem decide a contratacao?', type: 'radio', required: true, options: ['Eu decido sozinho', 'Eu + socio/diretor', 'Preciso aprovar com diretoria'] },
       { name: 'budget', label: 'Tem budget separado pra esse tipo de investimento?', type: 'radio', required: false, options: ['Sim', 'Ainda nao mas consigo alocar', 'Nao no momento'] },
     ],
   },
