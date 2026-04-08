@@ -250,12 +250,12 @@ export function V2Homepage() {
               const Icon = problemIcons[i]
               return (
                 <FadeInItem key={i}>
-                  <div className="group p-6 md:p-7 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.12] transition-all hover:bg-white/[0.03] cursor-default">
-                    <div className="flex items-start gap-4">
+                  <div className="group p-6 md:p-7 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.12] transition-all hover:bg-white/[0.03] cursor-default h-full">
+                    <div className="flex items-center gap-4 h-full">
                       <div className="w-10 h-10 rounded-xl bg-red-500/[0.08] flex items-center justify-center shrink-0 group-hover:bg-red-500/[0.12] transition-colors">
                         <Icon className="w-4.5 h-4.5 text-red-400/80" strokeWidth={1.5} />
                       </div>
-                      <p className="text-[15px] text-[#b0b0b0] leading-[1.7] pt-1.5">{text}</p>
+                      <p className="text-[15px] text-[#b0b0b0] leading-[1.7]">{text}</p>
                     </div>
                   </div>
                 </FadeInItem>
@@ -479,7 +479,7 @@ export function V2Homepage() {
               { metric: '3', label: 'Businesses', desc: 'Managed simultaneously by the same system' },
             ]).map((item, i) => (
               <FadeInItem key={i}>
-                <div className="p-7 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#c49a4a]/20 transition-colors cursor-default">
+                <div className="p-7 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#c49a4a]/20 transition-colors cursor-default h-full">
                   <div
                     className="text-[clamp(2.5rem,5vw,3.5rem)] font-light text-white mb-1 tracking-[-0.03em]"
                     style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
