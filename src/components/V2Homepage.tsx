@@ -264,7 +264,7 @@ export function V2Homepage() {
       </section>
 
       {/* ═══════════════════ LEVELS ═══════════════════ */}
-      <section className="py-20 md:py-40 px-6 md:px-10 border-t border-white/[0.04]" id="v2-levels">
+      <section className="py-20 md:py-40 px-6 md:px-10 bg-[#0c0c0c]" id="v2-levels">
         <div className="max-w-[1200px] mx-auto">
           <FadeIn className="mb-14 md:mb-20 md:text-right">
             <p className="text-[12px] text-[#4d8eff] font-semibold tracking-[0.2em] uppercase mb-4">{t.levels.label}</p>
@@ -322,7 +322,7 @@ export function V2Homepage() {
       </section>
 
       {/* ═══════════════════ SYSTEM ═══════════════════ */}
-      <section className="py-20 md:py-40 px-6 md:px-10 border-t border-white/[0.04]" id="v2-system">
+      <section className="py-20 md:py-40 px-6 md:px-10" id="v2-system">
         <div className="max-w-[1200px] mx-auto">
           <FadeIn>
             <p className="text-[12px] text-[#4d8eff] font-semibold tracking-[0.2em] uppercase mb-4">{t.system.label}</p>
@@ -398,7 +398,7 @@ export function V2Homepage() {
       </section>
 
       {/* ═══════════════════ PROCESS ═══════════════════ */}
-      <section className="py-20 md:py-40 px-6 md:px-10 border-t border-white/[0.04]" id="v2-process">
+      <section className="py-20 md:py-40 px-6 md:px-10 bg-[#0c0c0c]" id="v2-process">
         <div className="max-w-[1200px] mx-auto">
           <FadeIn className="md:text-right mb-14 md:mb-20">
             <p className="text-[12px] text-[#4d8eff] font-semibold tracking-[0.2em] uppercase mb-4">{t.process.label}</p>
@@ -442,7 +442,7 @@ export function V2Homepage() {
       </section>
 
       {/* ═══════════════════ SOCIAL PROOF ═══════════════════ */}
-      <section className="py-20 md:py-40 px-6 md:px-10 border-t border-white/[0.04] relative" id="v2-proof">
+      <section className="py-20 md:py-40 px-6 md:px-10 relative" id="v2-proof">
         {/* Subtle background */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#4d8eff]/[0.02] to-transparent pointer-events-none" />
 
@@ -516,7 +516,7 @@ export function V2Homepage() {
       </section>
 
       {/* ═══════════════════ CONTACT ═══════════════════ */}
-      <section className="py-20 md:py-40 px-6 md:px-10 border-t border-white/[0.04]" id="v2-contact">
+      <section className="py-20 md:py-40 px-6 md:px-10 bg-[#0c0c0c]" id="v2-contact">
         <div className="max-w-[1200px] mx-auto">
           <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
             <FadeIn>
@@ -602,7 +602,7 @@ export function V2Homepage() {
       </section>
 
       {/* ═══════════════════ FOOTER ═══════════════════ */}
-      <footer className="border-t border-white/[0.04] py-12 px-6 md:px-10">
+      <footer className="py-12 px-6 md:px-10 bg-[#080808]">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div>
@@ -633,8 +633,8 @@ export function V2Homepage() {
                 <p className="text-[10px] text-[#555] uppercase tracking-[0.15em] font-semibold mb-2">
                   {lang === 'pt' ? 'Links' : 'Links'}
                 </p>
-                <a href="https://www.linkedin.com/company/leed-digital" target="_blank" rel="noopener noreferrer" className="block text-[12px] text-[#777] hover:text-white transition-colors cursor-pointer">LinkedIn</a>
-                <button onClick={() => scrollTo('v2-contact')} className="block text-[12px] text-[#777] hover:text-white transition-colors cursor-pointer text-left">{lang === 'pt' ? 'Agendar diagnostico' : 'Book a diagnostic'}</button>
+                <a href="https://www.linkedin.com/company/leeddigital" target="_blank" rel="noopener noreferrer" className="block text-[12px] text-[#777] hover:text-white transition-colors cursor-pointer">LinkedIn</a>
+                <a href="/assessment" className="block text-[12px] text-[#777] hover:text-white transition-colors cursor-pointer">{lang === 'pt' ? 'Agendar diagnostico' : 'Book a diagnostic'}</a>
               </div>
             </div>
           </div>

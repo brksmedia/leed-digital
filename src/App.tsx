@@ -48,7 +48,9 @@ function App() {
     return <Assessment />
   }
 
-  if (window.location.pathname === '/v2') {
+  if (window.location.pathname === '/v1') {
+    // old homepage below
+  } else {
     return <V2Homepage />
   }
 
@@ -349,7 +351,7 @@ function App() {
         <div className="flex flex-col md:flex-row justify-between items-center max-w-[1200px] mx-auto">
           <div className="text-[10px] font-medium text-[#333] mb-3 md:mb-0 uppercase tracking-[0.15em]">LEED Digital © 2026</div>
           <div className="flex gap-6 text-[11px] text-[#444]">
-            <a href="https://www.linkedin.com/company/leed-digital" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">LinkedIn</a>
+            <a href="https://www.linkedin.com/company/leeddigital" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors cursor-pointer">LinkedIn</a>
             <a href="mailto:info@leed.digital" className="hover:text-white transition-colors cursor-pointer">info@leed.digital</a>
           </div>
         </div>
