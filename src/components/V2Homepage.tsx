@@ -30,6 +30,7 @@ export function V2Homepage() {
   const [lang, setLang] = useState<Lang>(getLangFromURL)
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [emailError, setEmailError] = useState(false)
+  const [phoneError, setPhoneError] = useState(false)
   const [mobileMenu, setMobileMenu] = useState(false)
   const [videoMuted, setVideoMuted] = useState(true)
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -585,9 +586,12 @@ export function V2Homepage() {
                   const data = new FormData(form)
                   const name = (data.get('name') as string || '').trim()
                   const email = (data.get('email') as string || '').trim()
-                  if (!name || !email) return
+                  const phone = (data.get('phone') as string || '').trim()
+                  if (!name || !email || !phone) return
                   if (!emailRegex.test(email)) { setEmailError(true); return }
                   setEmailError(false)
+                  if (phone.length < 10 || phone.length > 15) { setPhoneError(true); return }
+                  setPhoneError(false)
                   setFormStatus('sending')
                   try {
                     const res = await fetch('https://formspree.io/f/mwvwaypr', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } })
@@ -608,6 +612,11 @@ export function V2Homepage() {
                     <label className="text-[11px] text-[#bbb] uppercase tracking-[0.15em] block mb-2 font-semibold">{t.contact.form.email}</label>
                     <input type="email" name="email" required className={`w-full bg-white/[0.03] border rounded-xl px-5 py-3.5 text-white text-[14px] placeholder-[#444] focus:outline-none transition-colors ${emailError ? 'border-red-500/60 focus:border-red-500' : 'border-white/[0.08] focus:border-[#4d8eff]/50'}`} placeholder={t.contact.form.emailPlaceholder} onChange={() => emailError && setEmailError(false)} />
                     {emailError && <p className="text-red-400 text-xs mt-1.5">{t.contact.form.invalidEmail}</p>}
+                  </div>
+                  <div>
+                    <label className="text-[11px] text-[#bbb] uppercase tracking-[0.15em] block mb-2 font-semibold">{t.contact.form.phone}</label>
+                    <input type="tel" name="phone" required inputMode="numeric" pattern="[0-9]{10,15}" minLength={10} maxLength={15} onInput={(e) => { const el = e.currentTarget; el.value = el.value.replace(/[^0-9]/g, ''); if (phoneError) setPhoneError(false) }} className={`w-full bg-white/[0.03] border rounded-xl px-5 py-3.5 text-white text-[14px] placeholder-[#444] focus:outline-none transition-colors ${phoneError ? 'border-red-500/60 focus:border-red-500' : 'border-white/[0.08] focus:border-[#4d8eff]/50'}`} placeholder={t.contact.form.phonePlaceholder} />
+                    {phoneError && <p className="text-red-400 text-xs mt-1.5">{t.contact.form.invalidPhone}</p>}
                   </div>
                   <div>
                     <label className="text-[11px] text-[#bbb] uppercase tracking-[0.15em] block mb-2 font-semibold">{t.contact.form.message}</label>
