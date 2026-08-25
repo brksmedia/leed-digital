@@ -78,67 +78,27 @@ export function ContactPage() {
       </header>
 
       <main>
-        <section className="contact-hero" aria-labelledby="contact-title">
+        <section className="contact-main" aria-labelledby="contact-title">
           <aside className="contact-index" aria-hidden="true">
             <span>01</span>
-            <p>DIREÇÃO VISUAL / 2026</p>
+            <p>CONTATO / 2026</p>
           </aside>
 
-          <div className="contact-hero-copy">
-            <p className="contact-kicker">CONTATO / NOVO PROJETO</p>
-            <h1 id="contact-title">
-              Conte o que precisa
-              <span>funcionar melhor.</span>
-            </h1>
-            <p className="contact-lead">
-              Começamos pelo processo, não pela ferramenta. Mostre onde a operação
-              trava, o que hoje depende de improviso e o que precisa ganhar clareza.
-            </p>
-            <a className="contact-primary-link" href="#briefing">
-              Enviar contexto
-              <ArrowUpRight aria-hidden="true" />
-            </a>
-          </div>
+          <div className="contact-content">
+            <header className="contact-intro">
+              <p className="contact-kicker">NOVO PROJETO / CONTATO</p>
+              <h1 id="contact-title">
+                Conte o que precisa <span>funcionar melhor.</span>
+              </h1>
+              <p>
+                Mostre como o trabalho acontece hoje, onde ele trava e o que precisa
+                ganhar clareza. Respondemos em até um dia útil.
+              </p>
+              <i aria-hidden="true" />
+            </header>
 
-          <div className="contact-map" aria-label="Fluxo inicial do projeto">
-            <div className="contact-map-heading">
-              <span>MAPA INICIAL / 01</span>
-              <span className="contact-status"><i /> CANAL ABERTO</span>
-            </div>
-            <div className="contact-map-line contact-map-line-one" />
-            <div className="contact-map-line contact-map-line-two" />
-            <article className="contact-map-card contact-map-card-input">
-              <small>ENTRADA / 01</small>
-              <strong>Seu contexto</strong>
-              <span>PROCESSO REAL</span>
-            </article>
-            <article className="contact-map-card contact-map-card-output">
-              <small>PRÓXIMO / 02</small>
-              <strong>Conversa direta</strong>
-              <span>SEM PITCH PRONTO</span>
-            </article>
-          </div>
-        </section>
-
-        <section className="contact-briefing" id="briefing" aria-labelledby="briefing-title">
-          <div className="contact-section-number" aria-hidden="true">02</div>
-
-          <div className="contact-briefing-intro">
-            <p className="contact-kicker contact-kicker-light">PRIMEIRO CONTEXTO</p>
-            <h2 id="briefing-title">Vamos entender o cenário.</h2>
-            <p>
-              Não precisa escrever um briefing perfeito. Descreva o que acontece hoje
-              e o que deveria acontecer no lugar.
-            </p>
-
-            <ol className="contact-steps" aria-label="Próximos passos">
-              <li><span>01</span> Lemos o contexto</li>
-              <li><span>02</span> Recortamos o problema</li>
-              <li><span>03</span> Marcamos uma conversa</li>
-            </ol>
-          </div>
-
-          <div className="contact-form-panel">
+            <div className="contact-layout">
+              <div className="contact-form-panel">
             <div className="contact-form-heading">
               <div>
                 <span>BRIEFING / 01</span>
@@ -209,40 +169,54 @@ export function ContactPage() {
                     Não foi possível enviar agora. Tente novamente ou fale com a gente por email.
                   </p>
                 )}
+
+                <p className="contact-form-note">
+                  Usaremos seus dados apenas para responder sobre este projeto.
+                </p>
               </form>
             )}
+              </div>
+
+              <aside className="contact-sidebar" aria-labelledby="channels-title">
+                <section>
+                  <p className="contact-kicker">CONTATO DIRETO</p>
+                  <h2 id="channels-title">Prefere falar sem formulário?</h2>
+
+                  <a className="contact-direct-link" href="mailto:info@leed.digital">
+                    <span className="contact-direct-icon"><Mail aria-hidden="true" /></span>
+                    <span>
+                      <small>EMAIL</small>
+                      <strong>info@leed.digital</strong>
+                    </span>
+                    <ArrowUpRight aria-hidden="true" />
+                  </a>
+
+                  <a
+                    className="contact-direct-link"
+                    href="https://wa.me/5511947276831?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20um%20sistema%20sob%20medida."
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <span className="contact-direct-icon"><MessageCircle aria-hidden="true" /></span>
+                    <span>
+                      <small>WHATSAPP</small>
+                      <strong>Iniciar conversa</strong>
+                    </span>
+                    <ArrowUpRight aria-hidden="true" />
+                  </a>
+                </section>
+
+                <section className="contact-next-steps">
+                  <p className="contact-kicker">DEPOIS DO ENVIO</p>
+                  <ol className="contact-steps" aria-label="Próximos passos">
+                    <li><span>01</span> Lemos o contexto</li>
+                    <li><span>02</span> Recortamos o problema</li>
+                    <li><span>03</span> Marcamos uma conversa</li>
+                  </ol>
+                </section>
+              </aside>
+            </div>
           </div>
-        </section>
-
-        <section className="contact-channels" aria-labelledby="channels-title">
-          <div className="contact-section-number contact-section-number-dark" aria-hidden="true">03</div>
-          <div className="contact-channels-heading">
-            <p className="contact-kicker">OUTROS CANAIS</p>
-            <h2 id="channels-title">Prefere falar direto?</h2>
-          </div>
-
-          <a className="contact-channel-card" href="mailto:info@leed.digital">
-            <Mail aria-hidden="true" />
-            <span>
-              <small>EMAIL</small>
-              <strong>info@leed.digital</strong>
-            </span>
-            <ArrowUpRight aria-hidden="true" />
-          </a>
-
-          <a
-            className="contact-channel-card contact-channel-card-blue"
-            href="https://wa.me/5511947276831?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20um%20sistema%20sob%20medida."
-            target="_blank"
-            rel="noreferrer"
-          >
-            <MessageCircle aria-hidden="true" />
-            <span>
-              <small>WHATSAPP</small>
-              <strong>Iniciar conversa</strong>
-            </span>
-            <ArrowUpRight aria-hidden="true" />
-          </a>
         </section>
       </main>
 
