@@ -66,6 +66,9 @@ export function ContactPage() {
 
   return (
     <div className="contact-page">
+      <a className="contact-skip-link" href="#contact-main-content">
+        Pular para o conteúdo
+      </a>
       <header className="contact-header">
         <a className="contact-logo" href="/" aria-label="LEED, página inicial">
           LEED<span>.</span>
@@ -77,7 +80,7 @@ export function ContactPage() {
         </a>
       </header>
 
-      <main>
+      <main id="contact-main-content" tabIndex={-1}>
         <section className="contact-main" aria-labelledby="contact-title">
           <aside className="contact-index" aria-hidden="true">
             <span>01</span>
@@ -102,7 +105,7 @@ export function ContactPage() {
             <div className="contact-form-heading">
               <div>
                 <span>BRIEFING / 01</span>
-                <h3>Fale sobre o projeto</h3>
+                <h2>Fale sobre o projeto</h2>
               </div>
               <p>* campos obrigatórios</p>
             </div>
@@ -111,14 +114,26 @@ export function ContactPage() {
               <div className="contact-form-result" role="status">
                 <span className="contact-result-icon"><Check aria-hidden="true" /></span>
                 <p className="contact-kicker">CONTEXTO RECEBIDO</p>
-                <h3>Agora temos um ponto de partida.</h3>
+                <h2>Agora temos um ponto de partida.</h2>
                 <p>Vamos responder pelo email informado para combinar o próximo passo.</p>
                 <button type="button" onClick={() => setSubmitState('idle')}>
                   Enviar outro contexto
                 </button>
               </div>
             ) : (
-              <form className="contact-form" onSubmit={handleSubmit}>
+              <form
+                className="contact-form"
+                onSubmit={handleSubmit}
+                aria-busy={submitState === 'sending'}
+              >
+                <input
+                  className="contact-honeypot"
+                  name="_gotcha"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
                 <div className="contact-field">
                   <label htmlFor="contact-name">Nome *</label>
                   <input id="contact-name" name="name" type="text" autoComplete="name" required />
