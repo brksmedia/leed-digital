@@ -279,16 +279,11 @@
 
       .hero__bottom {
         display: grid;
-        grid-template-columns: minmax(210px, 0.55fr) 1fr;
+        grid-template-columns: minmax(250px, 0.68fr) minmax(0, 1fr);
         gap: 32px;
-        align-items: end;
+        align-items: center;
         padding-top: 24px;
         border-top: 1px solid var(--line);
-      }
-
-      .hero__actions {
-        display: grid;
-        gap: 10px;
       }
 
       .primary-cta {
@@ -297,10 +292,12 @@
         justify-content: space-between;
         gap: 20px;
         min-height: 52px;
+        width: 100%;
         padding: 13px 16px;
         color: var(--paper-bright);
         background: var(--blue);
         border: 1px solid var(--blue);
+        white-space: nowrap;
         transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
       }
 
@@ -1470,7 +1467,7 @@
         <span>São Paulo, BR</span>
         <span id="clock">00:00:00</span>
         <a class="topbar__cta" href="/contact/" data-contact-cta="header">
-          <span class="topbar__cta-long">Falar sobre um projeto</span>
+          <span class="topbar__cta-long">Entre em contato</span>
           <span class="topbar__cta-short">Contato</span>
           <span aria-hidden="true">↗</span>
         </a>
@@ -1492,10 +1489,7 @@
             <span class="title-line">em sistemas <span class="accent">claros.</span></span>
           </h1>
           <div class="hero__bottom reveal">
-            <div class="hero__actions">
-              <a class="primary-cta micro" href="/contact/" data-contact-cta="hero">Falar sobre um projeto</a>
-              <a class="text-link micro" href="#work">Ver projetos</a>
-            </div>
+            <a class="primary-cta micro" href="/contact/" data-contact-cta="hero">Conversar sobre sua operação</a>
             <p class="hero__summary">
               Projetamos e desenvolvemos software sob medida para organizar operações,
               integrar dados e conectar equipes.
