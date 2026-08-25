@@ -509,17 +509,41 @@
 
       .statement {
         display: grid;
-        grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
-        gap: clamp(36px, 4vw, 64px);
+        grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.55fr);
+        gap: clamp(48px, 6vw, 104px);
+      }
+
+      .chapter--dark {
+        position: relative;
+        display: block;
+      }
+
+      .chapter--dark .chapter__rail {
+        position: absolute;
+        inset: 0 auto 0 0;
+        z-index: 1;
+        width: 7rem;
+        border-right: 0;
+        pointer-events: none;
       }
 
       .chapter--dark .chapter__body {
-        padding-left: clamp(20px, 1.8vw, 28px);
+        padding-left: clamp(28px, 3vw, 48px);
         padding-right: clamp(28px, 5vw, 80px);
       }
 
-      .chapter--dark .statement__aside p {
-        transform: translateX(clamp(-96px, -5vw, -48px));
+      .statement__lead {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .statement__support {
+        max-width: 430px;
+        margin: clamp(48px, 6vw, 96px) 0 0;
+        color: rgba(255, 255, 255, 0.68);
+        font-size: 1.12rem;
+        line-height: 1.45;
       }
 
       .statement h2 {
@@ -538,8 +562,7 @@
       .statement__aside {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        gap: 80px;
+        justify-content: flex-end;
         padding-top: 8px;
       }
 
@@ -548,16 +571,8 @@
         background: var(--ink);
       }
 
-      .chapter--dark .chapter__rail {
-        border-color: rgba(255, 255, 255, 0.22);
-      }
-
       .chapter--dark .statement h2 span {
         color: var(--signal);
-      }
-
-      .chapter--dark .statement__aside p {
-        color: rgba(255, 255, 255, 0.68);
       }
 
       .chapter--dark .metric {
@@ -575,13 +590,6 @@
 
       .chapter--mist .project__visual {
         background: var(--paper-bright);
-      }
-
-      .statement__aside p {
-        max-width: 370px;
-        margin: 0;
-        font-size: 1.12rem;
-        line-height: 1.45;
       }
 
       .metric {
@@ -1214,10 +1222,6 @@
           grid-template-columns: 1fr;
         }
 
-        .chapter--dark .statement__aside p {
-          transform: none;
-        }
-
         .system-panel {
           min-height: 520px;
           padding: 18px;
@@ -1448,15 +1452,17 @@
           <span class="index micro">02</span>
         </aside>
         <div class="chapter__body statement">
-          <h2 class="reveal">
-            Primeiro entendemos como o trabalho acontece. Depois transformamos o
-            <span>processo em software.</span>
-          </h2>
-          <div class="statement__aside reveal">
-            <p>
+          <div class="statement__lead reveal">
+            <h2>
+              Primeiro entendemos como o trabalho acontece. Depois transformamos o
+              <span>processo em software.</span>
+            </h2>
+            <p class="statement__support">
               Planilhas, ferramentas prontas e integrações improvisadas funcionam até
               deixarem de acompanhar a operação. É aí que entramos.
             </p>
+          </div>
+          <div class="statement__aside reveal">
             <div class="metric">
               <strong>01</strong>
               <span class="micro">Um time do desenho à produção</span>
