@@ -62,6 +62,10 @@ check(count(home, /<h1\b/g) === 1, 'Home: deve existir exatamente um h1')
 check(count(contactComponent, /<h1\b/g) === 1, 'Contato: deve existir exatamente um h1')
 checkHashLinks(home, 'Home')
 check(home.includes('href="/contact/"'), 'Home: CTA para /contact/ ausente')
+for (const location of ['header', 'hero', 'footer']) {
+  check(home.includes(`data-contact-cta="${location}"`), `Home: CTA de contato ausente em ${location}`)
+}
+check(home.includes('event: "contact_cta_click"'), 'Home: evento de clique dos CTAs ausente')
 check(contactComponent.includes('href="/"'), 'Contato: retorno para a Home ausente')
 
 for (const field of ['name', 'email', 'message']) {

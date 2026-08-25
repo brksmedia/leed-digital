@@ -171,8 +171,32 @@
 
       .topbar__meta {
         display: flex;
+        align-items: center;
         justify-content: flex-end;
-        gap: 24px;
+        gap: 20px;
+      }
+
+      .topbar__cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 44px;
+        padding: 10px 14px;
+        color: var(--paper-bright);
+        background: var(--ink);
+        border: 1px solid var(--ink);
+        transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
+      }
+
+      .topbar__cta:hover {
+        color: var(--paper-bright);
+        background: var(--blue);
+        border-color: var(--blue);
+      }
+
+      .topbar__cta-short {
+        display: none;
       }
 
       .hero {
@@ -255,11 +279,47 @@
 
       .hero__bottom {
         display: grid;
-        grid-template-columns: minmax(180px, 0.55fr) 1fr;
+        grid-template-columns: minmax(210px, 0.55fr) 1fr;
         gap: 32px;
         align-items: end;
         padding-top: 24px;
         border-top: 1px solid var(--line);
+      }
+
+      .hero__actions {
+        display: grid;
+        gap: 10px;
+      }
+
+      .primary-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        min-height: 52px;
+        padding: 13px 16px;
+        color: var(--paper-bright);
+        background: var(--blue);
+        border: 1px solid var(--blue);
+        transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+      }
+
+      .primary-cta:hover {
+        background: var(--blue-dark);
+        border-color: var(--blue-dark);
+        transform: translateY(-2px);
+      }
+
+      .primary-cta::after {
+        content: "↗";
+        font-size: 1.1rem;
+      }
+
+      .primary-cta:focus-visible,
+      .topbar__cta:focus-visible,
+      .text-link:focus-visible {
+        outline: 3px solid var(--signal);
+        outline-offset: 3px;
       }
 
       .hero__summary {
@@ -1083,6 +1143,10 @@
       }
 
       @media (max-width: 1199px) {
+        .topbar__meta > span:first-child {
+          display: none;
+        }
+
         .hero {
           grid-template-columns: 4rem minmax(0, 1.2fr) minmax(320px, 0.8fr);
         }
@@ -1180,8 +1244,12 @@
           display: none;
         }
 
-        .topbar__meta span:first-child {
+        .topbar__meta > span {
           display: none;
+        }
+
+        .topbar__cta {
+          padding-inline: 13px;
         }
 
         .hero,
@@ -1205,7 +1273,7 @@
           width: 100%;
           max-width: 100%;
           margin-block: 80px 60px;
-          font-size: clamp(2rem, 9.75vw, 4.2rem);
+          font-size: clamp(2rem, 8.75vw, 4.2rem);
           line-height: 0.92;
         }
 
@@ -1361,6 +1429,16 @@
         }
       }
 
+      @media (max-width: 480px) {
+        .topbar__cta-long {
+          display: none;
+        }
+
+        .topbar__cta-short {
+          display: inline;
+        }
+      }
+
       @media (prefers-reduced-motion: reduce) {
         html {
           scroll-behavior: auto;
@@ -1391,6 +1469,11 @@
       <div class="topbar__meta micro">
         <span>São Paulo, BR</span>
         <span id="clock">00:00:00</span>
+        <a class="topbar__cta" href="/contact/" data-contact-cta="header">
+          <span class="topbar__cta-long">Falar sobre um projeto</span>
+          <span class="topbar__cta-short">Contato</span>
+          <span aria-hidden="true">↗</span>
+        </a>
       </div>
     </header>
 
@@ -1409,7 +1492,10 @@
             <span class="title-line">em sistemas <span class="accent">claros.</span></span>
           </h1>
           <div class="hero__bottom reveal">
-            <a class="text-link micro" href="#work">Ver projetos</a>
+            <div class="hero__actions">
+              <a class="primary-cta micro" href="/contact/" data-contact-cta="hero">Falar sobre um projeto</a>
+              <a class="text-link micro" href="#work">Ver projetos</a>
+            </div>
             <p class="hero__summary">
               Projetamos e desenvolvemos software sob medida para organizar operações,
               integrar dados e conectar equipes.
@@ -1658,7 +1744,7 @@
           <div class="contact__footer micro reveal">
             <p>Business systems studio</p>
             <p>© 2026 LEED.Pontodigital</p>
-            <a class="text-link" href="/contact/">Conversar sobre o projeto</a>
+            <a class="text-link" href="/contact/" data-contact-cta="footer">Conversar sobre o projeto</a>
           </div>
         </div>
       </section>
@@ -1680,6 +1766,16 @@
 
       updateClock();
       setInterval(updateClock, 1000);
+
+      document.querySelectorAll("[data-contact-cta]").forEach((link) => {
+        link.addEventListener("click", () => {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "contact_cta_click",
+            cta_location: link.dataset.contactCta,
+          });
+        });
+      });
 
       if ("IntersectionObserver" in window && !reduceMotion.matches) {
         document.documentElement.classList.add("reveal-ready");
