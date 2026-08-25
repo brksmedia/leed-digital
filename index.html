@@ -510,7 +510,16 @@
       .statement {
         display: grid;
         grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
-        gap: 10vw;
+        gap: clamp(36px, 4vw, 64px);
+      }
+
+      .chapter--dark .chapter__body {
+        padding-left: clamp(20px, 1.8vw, 28px);
+        padding-right: clamp(28px, 5vw, 80px);
+      }
+
+      .chapter--dark .statement__aside p {
+        transform: translateX(clamp(-96px, -5vw, -48px));
       }
 
       .statement h2 {
@@ -1203,6 +1212,10 @@
         .capabilities__intro,
         .contact__footer {
           grid-template-columns: 1fr;
+        }
+
+        .chapter--dark .statement__aside p {
+          transform: none;
         }
 
         .system-panel {
