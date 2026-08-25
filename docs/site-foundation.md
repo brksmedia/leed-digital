@@ -111,5 +111,5 @@ O teste automatizado valida arquivos essenciais, metadata, rotas internas e requ
 | Arquivos de SEO | Aprovado localmente | `robots.txt` e `sitemap.xml` retornaram 200 no preview |
 | Console do navegador | Aprovado | nenhuma exceção observada |
 | Envio real do formulário | Não executado | evita criar lead ou mensagem externa sem autorização específica |
-| Status 404 em produção | Pendente | `_redirects` foi corrigido, mas requer publicação e verificação HTTP |
+| Status 404 em produção | Em validação | Página `public/404.html` adicionada para impedir o fallback SPA com status 200 da Cloudflare Pages |
 | Tags e consentimento | Pendente | exige inspeção do GTM e definição jurídica |

@@ -84,7 +84,7 @@ for (const header of ['X-Content-Type-Options', 'X-Frame-Options', 'Referrer-Pol
   check(headers.includes(header), `_headers: ${header} ausente`)
 }
 
-for (const output of ['dist/robots.txt', 'dist/sitemap.xml', 'dist/_headers', 'dist/_redirects']) {
+for (const output of ['dist/404.html', 'dist/robots.txt', 'dist/sitemap.xml', 'dist/_headers', 'dist/_redirects']) {
   check(existsSync(resolve(root, output)), `Build: ${output} ausente`)
 }
 
