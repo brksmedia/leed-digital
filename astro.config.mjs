@@ -5,6 +5,7 @@ import { defineConfig } from 'astro/config'
 export default defineConfig({
   site: 'https://leed.digital',
   output: 'static',
+  outDir: process.env.INCLUDE_DRAFTS === 'true' ? './dist-review' : './dist',
   trailingSlash: 'always',
   build: {
     format: 'directory',

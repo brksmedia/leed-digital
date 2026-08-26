@@ -56,6 +56,11 @@ test('documentação de operação descreve Astro, revisão e publicação bloqu
   assert.match(readme, /Astro/i)
   assert.match(readme, /npm run check/)
   assert.match(readme, /Cloudflare Pages/i)
+  assert.match(readme, /INCLUDE_DRAFTS=true/)
+  assert.match(readme, /INCLUDE_DRAFTS=true npm run preview/)
+  assert.match(readme, /noindex, nofollow/i)
+  assert.match(readme, /dist-review/)
+  assert.match(readme, /não (?:publicar|fazer deploy)/i)
 
   const foundation = readRequired('docs/site-foundation.md')
   assert.match(foundation, /LEED Digital/)

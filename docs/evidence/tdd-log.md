@@ -199,3 +199,35 @@ npm run check && npm run lint && npm run build && npm test && npm audit
 ```
 
 Saída: check e lint aprovados; build estático com 13 páginas; suíte unitária 5/5; suíte de build/servidor 9/9; audit com 0 vulnerabilidades. O tracking legado agora define `window.gtag` explicitamente e o teste do HTML compilado protege a integração com a ilha React.
+
+### RED 12: drafts gerados no build padrão e nota interna em `llms.txt`
+
+Comando:
+
+```text
+npm run build && node --test tests/site-output.test.mjs tests/server.test.mjs
+```
+
+Saída: 5/9 testes aprovados e 4 falhas esperadas. As três rotas draft existiam e respondiam 200, páginas de serviços ainda as referenciavam, e `llms.txt` continha “hipótese”, “aprovada” e “validada”.
+
+### GREEN 12: build padrão fail-closed e revisão local opt-in
+
+Comandos:
+
+```text
+npm run build && node --test tests/site-output.test.mjs tests/server.test.mjs
+node --test tests/content-source.test.mjs
+npm test
+```
+
+Saída: o build padrão gerou 10 páginas, não gerou nem referenciou os três drafts e passou 9/9 testes de output/preview; a documentação passou 4/4. `npm test` também gerou um build isolado de revisão com `INCLUDE_DRAFTS=true`, confirmou as três rotas com `noindex, nofollow` e nota editorial em 1/1 teste, e removeu `dist-review` ao terminar. `llms.txt` passou sem os termos internos proibidos.
+
+### RED/GREEN 13: isolamento contra variável herdada
+
+Comando RED:
+
+```text
+INCLUDE_DRAFTS=true npm test
+```
+
+Saída RED: 8/9 testes do build padrão passaram; o subprocesso de preview herdou a variável e procurou `dist-review` antes da fase de revisão. No GREEN, o runner passou o ambiente sem `INCLUDE_DRAFTS` tanto ao build quanto aos testes/preview padrão; a mesma execução adversarial passou e `dist-review` foi removido ao final.

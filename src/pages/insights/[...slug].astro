@@ -6,7 +6,8 @@ import { SITE } from '../../config/site'
 import { breadcrumbJsonLd } from '../../lib/structured-data'
 
 export async function getStaticPaths() {
-  const posts = await getCollection('insights')
+  const includeDrafts = process.env.INCLUDE_DRAFTS === 'true'
+  const posts = await getCollection('insights', ({ data }) => includeDrafts || !data.draft)
   return posts.map((post) => ({ params: { slug: post.id }, props: { post } }))
 }
 

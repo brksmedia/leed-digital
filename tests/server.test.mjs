@@ -4,13 +4,15 @@ import test from 'node:test'
 
 const port = 43219
 const origin = `http://127.0.0.1:${port}`
+const draftRoutes = [
+  '/insights/quando-uma-empresa-precisa-de-um-sistema-proprio/',
+  '/insights/automacao-agente-de-ia-e-sistema-operacional/',
+  '/insights/processos-adequados-para-agentes-de-ia/',
+]
 const routes = [
   '/', '/contact/', '/sobre/', '/como-trabalhamos/',
   '/servicos/desenvolvimento-de-sistemas/', '/servicos/agentes-de-ia/',
   '/servicos/integracoes-e-dados/', '/casos/', '/insights/',
-  '/insights/quando-uma-empresa-precisa-de-um-sistema-proprio/',
-  '/insights/automacao-agente-de-ia-e-sistema-operacional/',
-  '/insights/processos-adequados-para-agentes-de-ia/',
   '/robots.txt', '/sitemap-index.xml', '/insights/rss.xml', '/llms.txt',
 ]
 
@@ -43,6 +45,11 @@ test('preview local serve todas as rotas e retorna 404 real', { timeout: 20_000 
     for (const route of routes) {
       const response = await fetch(`${origin}${route}`, { redirect: 'manual' })
       assert.equal(response.status, 200, `${route} retornou ${response.status}`)
+    }
+
+    for (const route of draftRoutes) {
+      const response = await fetch(`${origin}${route}`, { redirect: 'manual' })
+      assert.equal(response.status, 404, `${route} draft retornou ${response.status} no preview padrão`)
     }
 
     const redirect = await fetch(`${origin}/contact`, { redirect: 'manual' })

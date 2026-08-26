@@ -10,9 +10,20 @@ Site institucional em Astro, com saída estática completa para busca tradiciona
 - `/servicos/agentes-de-ia/`
 - `/servicos/integracoes-e-dados/`
 - `/casos/`
-- `/insights/` e três artigos iniciais
+- `/insights/`; os três artigos iniciais existem somente no modo local de revisão
 
-Os três insights permanecem `draft: true`: geram HTML local com `noindex`, mas ficam fora do índice, sitemap, RSS e `llms.txt` até aprovação. Casos não validados permanecem em `src/content/cases/` com `draft: true` e não geram rota pública.
+Os três insights permanecem `draft: true`: o build padrão não gera seus arquivos ou rotas e não os referencia em páginas, sitemap, RSS ou `llms.txt`. Casos não validados permanecem em `src/content/cases/` com `draft: true` e não geram rota pública.
+
+### Revisão local de drafts
+
+O opt-in exato `INCLUDE_DRAFTS=true` habilita um build isolado para revisão:
+
+```bash
+npm run build:review
+INCLUDE_DRAFTS=true npm run preview
+```
+
+O resultado fica em `dist-review/`. Os artigos draft mantêm `noindex, nofollow`, status de revisão e nota editorial visível. Não publicar nem fazer deploy de `dist-review`; esse artefato existe somente para revisão local. Qualquer valor diferente da string exata `true` mantém os drafts excluídos.
 
 ## Comandos
 
@@ -25,7 +36,7 @@ npm test
 npm run preview
 ```
 
-`npm test` verifica o formulário com `fetch` simulado (sem chamada ao Formspree), collections, HTML estático, metadata, links, JSON-LD, arquivos de discovery, rotas do preview e 404 real.
+`npm test` verifica o formulário com `fetch` simulado (sem chamada ao Formspree), collections, HTML estático, metadata, links, JSON-LD, arquivos de discovery, rotas do preview, 404 real e os contratos separados dos builds padrão e de revisão.
 
 ## Estrutura
 

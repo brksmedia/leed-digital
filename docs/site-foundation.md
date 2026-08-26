@@ -13,7 +13,7 @@ Status: rascunho local para revisão de Lucas. Não houve push, PR, merge ou dep
 
 ## Arquitetura
 
-Astro gera HTML estático completo. React é usado apenas no formulário de contato, onde existe interatividade real. URLs públicas são minúsculas e usam barra final. O sitemap é gerado por `@astrojs/sitemap`; RSS e `llms.txt` existem, mas excluem insights enquanto estiverem em revisão; `robots.txt` permanece permissivo.
+Astro gera HTML estático completo. React é usado apenas no formulário de contato, onde existe interatividade real. URLs públicas são minúsculas e usam barra final. O sitemap é gerado por `@astrojs/sitemap`; RSS e `llms.txt` existem, mas excluem insights enquanto estiverem em revisão; `robots.txt` permanece permissivo. O build padrão também exclui os próprios arquivos e rotas dos insights com `draft: true`.
 
 ## Mapa público em revisão
 
@@ -26,7 +26,7 @@ Astro gera HTML estático completo. React é usado apenas no formulário de cont
 - `/servicos/integracoes-e-dados/`
 - `/casos/`
 - `/insights/`
-- três artigos sob `/insights/<slug>/`
+- três artigos sob `/insights/<slug>/`, disponíveis somente no build local de revisão
 
 ## Política de prova
 
@@ -74,3 +74,5 @@ npm test
 ```
 
 A suíte cobre metadata, um H1 por rota, canonical, `lang`, links internos, JSON-LD, artifacts de discovery, formulário com requisição simulada, crawl local e 404 real.
+
+Para revisão explícita dos três drafts, `npm run build:review` define `INCLUDE_DRAFTS=true` e grava o resultado isolado em `dist-review/`. Essas páginas sempre incluem `noindex, nofollow` e nota editorial. Não publicar nem fazer deploy desse diretório. Sem o opt-in exato, drafts não geram arquivo ou rota.

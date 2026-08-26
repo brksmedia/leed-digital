@@ -6,6 +6,11 @@ import test from 'node:test'
 const root = resolve(import.meta.dirname, '..')
 const dist = join(root, 'dist')
 const site = 'https://leed.digital'
+const draftSlugs = [
+  'quando-uma-empresa-precisa-de-um-sistema-proprio',
+  'automacao-agente-de-ia-e-sistema-operacional',
+  'processos-adequados-para-agentes-de-ia',
+]
 
 const routes = [
   { path: '/', file: 'index.html', types: ['Organization', 'WebSite'] },
@@ -17,9 +22,6 @@ const routes = [
   { path: '/servicos/integracoes-e-dados/', file: 'servicos/integracoes-e-dados/index.html', types: ['Service', 'BreadcrumbList'] },
   { path: '/casos/', file: 'casos/index.html', types: ['BreadcrumbList'] },
   { path: '/insights/', file: 'insights/index.html', types: ['BreadcrumbList'] },
-  { path: '/insights/quando-uma-empresa-precisa-de-um-sistema-proprio/', file: 'insights/quando-uma-empresa-precisa-de-um-sistema-proprio/index.html', types: ['Article', 'BreadcrumbList'] },
-  { path: '/insights/automacao-agente-de-ia-e-sistema-operacional/', file: 'insights/automacao-agente-de-ia-e-sistema-operacional/index.html', types: ['Article', 'BreadcrumbList'] },
-  { path: '/insights/processos-adequados-para-agentes-de-ia/', file: 'insights/processos-adequados-para-agentes-de-ia/index.html', types: ['Article', 'BreadcrumbList'] },
 ]
 
 function htmlFor(route) {
@@ -79,13 +81,17 @@ test('tracking legado fica restrito às rotas já mensuradas e o formulário inf
   assert.match(contactHtml, /<form\b[^>]*\baction=["']https:\/\/formspree\.io\/f\/mwvwaypr["']/i, 'formulário sem action segura')
 })
 
-test('insights em revisão são renderizados localmente sem sinal de publicação ou descoberta', () => {
-  const articleRoutes = routes.filter((route) => route.types.includes('Article'))
-  for (const route of articleRoutes) {
-    const html = htmlFor(route)
-    assert.match(html, /name=["']robots["'][^>]+content=["']noindex, nofollow["']/i, `${route.path} deve ser noindex`)
-    assert.doesNotMatch(html, /revisão por Lucas/i, `${route.path} expõe identificador interno`)
-    assert.doesNotMatch(html, /Publicado em/i, `${route.path} afirma publicação antes da aprovação`)
+test('build padrão não gera nem referencia rotas de insights draft', () => {
+  const publicArtifacts = [
+    ...routes.map((route) => readFileSync(join(dist, route.file), 'utf8')),
+    readFileSync(join(dist, 'sitemap-0.xml'), 'utf8'),
+    readFileSync(join(dist, 'insights/rss.xml'), 'utf8'),
+    readFileSync(join(dist, 'llms.txt'), 'utf8'),
+  ].join('\n')
+
+  for (const slug of draftSlugs) {
+    assert.ok(!existsSync(join(dist, 'insights', slug, 'index.html')), `${slug} não pode gerar rota no build padrão`)
+    assert.doesNotMatch(publicArtifacts, new RegExp(`/insights/${slug}/`), `${slug} não pode ser referenciado pelo build padrão`)
   }
 })
 
@@ -171,6 +177,7 @@ test('artefatos de discovery e hosting existem no build', () => {
   assert.match(llms, /^# LEED Digital/m)
   assert.match(llms, /https:\/\/leed\.digital\/servicos\/agentes-de-ia\//)
   assert.doesNotMatch(llms, /\/insights\/(?:quando|automacao|processos)-/)
+  assert.doesNotMatch(llms, /\b(?:hipótese|aprovada|validada)\b/i)
 
   const sitemap = readFileSync(join(dist, 'sitemap-0.xml'), 'utf8')
   assert.doesNotMatch(sitemap, /\/insights\/(?:quando|automacao|processos)-/)

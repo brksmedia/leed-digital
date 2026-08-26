@@ -12,7 +12,7 @@ export async function GET() {
 
 > ${SITE.positioning}
 
-A LEED Digital desenvolve software sob medida, agentes de IA e integrações para empresas brasileiras B2B de serviços com operações complexas, dados dispersos e ferramentas desconectadas. Esta definição de público é uma hipótese comercial aprovada e ainda deve ser validada.
+A LEED Digital desenvolve software sob medida, agentes de IA e integrações para operações empresariais.
 
 ## Serviços
 
