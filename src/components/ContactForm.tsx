@@ -1,4 +1,4 @@
-import { type SyntheticEvent, useState } from 'react'
+import { type SyntheticEvent, useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, Check, LoaderCircle } from 'lucide-react'
 import { FORM_ENDPOINT, submitContactForm } from '../lib/contact-form.mjs'
 
@@ -20,6 +20,13 @@ const projectOptions = [
 
 export function ContactForm() {
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
+  const successRef = useRef<HTMLDivElement>(null)
+  const errorRef = useRef<HTMLParagraphElement>(null)
+
+  useEffect(() => {
+    if (submitState === 'success') successRef.current?.focus()
+    if (submitState === 'error') errorRef.current?.focus()
+  }, [submitState])
 
   async function handleSubmit(event: SyntheticEvent<HTMLFormElement, SubmitEvent>) {
     event.preventDefault()
@@ -48,7 +55,7 @@ export function ContactForm() {
       </div>
 
       {submitState === 'success' ? (
-        <div className="contact-form-result" role="status">
+        <div ref={successRef} className="contact-form-result" role="status" aria-live="polite" tabIndex={-1}>
           <span className="contact-result-icon"><Check aria-hidden="true" /></span>
           <p className="contact-kicker">CONTEXTO RECEBIDO</p>
           <h2>Agora temos um ponto de partida.</h2>
@@ -56,7 +63,7 @@ export function ContactForm() {
           <button type="button" onClick={() => setSubmitState('idle')}>Enviar outro contexto</button>
         </div>
       ) : (
-        <form className="contact-form" method="post" action={FORM_ENDPOINT} onSubmit={handleSubmit} aria-busy={submitState === 'sending'}>
+        <form className="contact-form" method="post" action={FORM_ENDPOINT} onSubmit={handleSubmit} aria-busy={submitState === 'sending'} aria-describedby={submitState === 'error' ? 'contact-form-note contact-form-error' : 'contact-form-note'}>
           <input className="contact-honeypot" name="_gotcha" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" />
           <div className="contact-field">
             <label htmlFor="contact-name">Nome *</label>
@@ -84,8 +91,8 @@ export function ContactForm() {
           <button className="contact-submit" type="submit" disabled={submitState === 'sending'}>
             {submitState === 'sending' ? <><LoaderCircle className="contact-spinner" aria-hidden="true" /> Enviando</> : <>Enviar contexto <ArrowUpRight aria-hidden="true" /></>}
           </button>
-          {submitState === 'error' && <p className="contact-form-error" role="alert">Não foi possível enviar agora. Tente novamente ou fale com a gente por email.</p>}
-          <p className="contact-form-note">Os dados serão processados pelo Formspree apenas para entregar sua mensagem e permitir nossa resposta sobre este projeto.</p>
+          {submitState === 'error' && <p ref={errorRef} id="contact-form-error" className="contact-form-error" role="alert" tabIndex={-1}>Não foi possível enviar agora. Tente novamente ou fale com a gente por email.</p>}
+          <p id="contact-form-note" className="contact-form-note">Os dados serão processados pelo Formspree apenas para entregar sua mensagem e permitir nossa resposta sobre este projeto.</p>
         </form>
       )}
     </div>

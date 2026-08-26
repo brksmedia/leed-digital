@@ -2,6 +2,7 @@
 import JsonLd from '../components/JsonLd.astro'
 import Metadata from '../components/Metadata.astro'
 import SiteFooter from '../components/SiteFooter.astro'
+import SiteNav from '../components/SiteNav.astro'
 import TrackingBody from '../components/TrackingBody.astro'
 import TrackingHead from '../components/TrackingHead.astro'
 import { SITE } from '../config/site'
@@ -1453,20 +1454,7 @@ const structuredData = [
   </head>
   <body>
     <TrackingBody />
-    <a class="skip-link micro" href="#top">Pular para o conteúdo</a>
-    <header class="topbar shell">
-      <a class="brand" href="#top" aria-label="LEED, início">LEED<span>.</span></a>
-      <div class="topbar__descriptor">Sistemas + agentes de IA</div>
-      <div class="topbar__meta micro">
-        <span>Brasil</span>
-        <span id="clock">00:00:00</span>
-        <a class="topbar__cta" href="/contact/" data-contact-cta="header">
-          <span class="topbar__cta-long">Entre em contato</span>
-          <span class="topbar__cta-short">Contato</span>
-          <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-    </header>
+    <SiteNav home />
 
     <main id="top" class="shell" tabindex="-1">
       <section class="hero">
@@ -1544,8 +1532,7 @@ const structuredData = [
         </aside>
         <div class="chapter__body statement">
           <h2 class="reveal">
-            Primeiro entendemos como o trabalho acontece. Depois transformamos o
-            <span>processo em software.</span>
+            Primeiro entendemos como o trabalho acontece. Depois transformamos o{' '}<span>processo em software.</span>
           </h2>
           <div class="statement__aside reveal">
             <p>
@@ -1741,21 +1728,7 @@ const structuredData = [
     <SiteFooter />
 
     <script is:inline>
-      const clock = document.querySelector("#clock");
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-      function updateClock() {
-        clock.textContent = new Intl.DateTimeFormat("pt-BR", {
-          timeZone: "America/Sao_Paulo",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false,
-        }).format(new Date());
-      }
-
-      updateClock();
-      setInterval(updateClock, 1000);
 
       document.querySelectorAll("[data-contact-cta]").forEach((link) => {
         link.addEventListener("click", () => {
@@ -1769,6 +1742,9 @@ const structuredData = [
 
       if ("IntersectionObserver" in window && !reduceMotion.matches) {
         document.documentElement.classList.add("reveal-ready");
+        window.setTimeout(() => {
+          document.documentElement.classList.remove("reveal-ready");
+        }, 4000);
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {

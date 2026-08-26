@@ -1,12 +1,261 @@
 ---
-import { PRIMARY_NAV } from '../config/site'
+interface Props {
+  home?: boolean
+}
+
+const { home = false } = Astro.props
+const currentPath = Astro.url.pathname
+const contentTarget = home ? 'top' : 'conteudo'
+const navItems = [
+  { href: '/', label: 'Início' },
+  { href: '/servicos/desenvolvimento-de-sistemas/', label: 'Sistemas' },
+  { href: '/servicos/agentes-de-ia/', label: 'Agentes de IA' },
+  { href: '/servicos/integracoes-e-dados/', label: 'Integrações e dados' },
+  { href: '/como-trabalhamos/', label: 'Como trabalhamos' },
+  { href: '/casos/', label: 'Casos' },
+  { href: '/insights/', label: 'Insights' },
+  { href: '/sobre/', label: 'Sobre' },
+]
+
+const isCurrent = (href: string) => currentPath === href
 ---
 
-<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
-<header class="site-header">
+<a class="skip-link" href={`#${contentTarget}`}>Pular para o conteúdo</a>
+<header class:list={['site-header', { 'site-header--home': home }]}>
   <a class="site-brand" href="/" aria-label="LEED Digital, página inicial">LEED<span>.</span></a>
-  <nav aria-label="Navegação principal">
-    {PRIMARY_NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+
+  <nav class="site-nav-desktop" aria-label="Navegação principal">
+    {navItems.map((item) => (
+      <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+    ))}
   </nav>
-  <a class="site-contact" href="/contact/">Contato <span aria-hidden="true">↗</span></a>
+
+  <a class="site-contact" href="/contact/" aria-current={isCurrent('/contact/') ? 'page' : undefined}>
+    Contato <span aria-hidden="true">↗</span>
+  </a>
+
+  <details class="site-menu">
+    <summary aria-controls="site-navigation" aria-expanded="false">
+      <span>Menu</span><span class="site-menu-icon" aria-hidden="true"></span>
+    </summary>
+    <nav id="site-navigation" aria-label="Navegação móvel">
+      {[...navItems, { href: '/contact/', label: 'Contato' }].map((item) => (
+        <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+      ))}
+    </nav>
+  </details>
 </header>
+
+<script>
+  document.querySelectorAll<HTMLDetailsElement>('.site-menu').forEach((menu) => {
+    const control = menu.querySelector('summary')
+    const links = menu.querySelectorAll('a')
+    if (!control) return
+
+    const syncExpanded = () => control.setAttribute('aria-expanded', String(menu.open))
+    const closeMenu = () => {
+      menu.removeAttribute('open')
+      syncExpanded()
+    }
+
+    menu.addEventListener('toggle', syncExpanded)
+    control.addEventListener('click', () => queueMicrotask(syncExpanded))
+    control.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault()
+        menu.toggleAttribute('open')
+      }
+    })
+    links.forEach((link) => link.addEventListener('click', closeMenu))
+    menu.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || !menu.open) return
+      event.preventDefault()
+      closeMenu()
+      control.focus()
+    })
+    syncExpanded()
+  })
+</script>
+
+<style>
+  .skip-link {
+    position: fixed;
+    z-index: 1000;
+    top: 12px;
+    left: 12px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 16px;
+    color: var(--ink, #151714);
+    background: var(--signal, #c8ff2e);
+    border: 2px solid currentColor;
+    font: 500 .72rem var(--mono, "IBM Plex Mono", monospace);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    transform: translateY(-180%);
+    transition: transform 160ms ease;
+  }
+
+  .skip-link:focus { transform: none; }
+
+  .site-header {
+    position: relative;
+    z-index: 30;
+    min-height: 82px;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(20px, 3vw, 48px);
+    padding: 0 clamp(22px, 4vw, 64px);
+    border-block: 1px solid var(--line, rgba(21, 23, 20, .22));
+    background: rgba(239, 237, 230, .96);
+  }
+
+  .site-brand {
+    width: max-content;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    color: inherit;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -.09em;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .site-brand span { color: var(--blue, #1557ff); }
+
+  .site-nav-desktop {
+    min-width: 0;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: clamp(8px, 1.35vw, 24px);
+  }
+
+  .site-nav-desktop a,
+  .site-contact,
+  .site-menu a,
+  .site-menu summary {
+    font: 500 .67rem var(--mono, "IBM Plex Mono", monospace);
+    letter-spacing: .055em;
+    text-transform: uppercase;
+  }
+
+  .site-nav-desktop a,
+  .site-contact {
+    position: relative;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .site-nav-desktop a[aria-current="page"],
+  .site-contact[aria-current="page"],
+  .site-menu a[aria-current="page"] {
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 7px;
+  }
+
+  .site-nav-desktop a[aria-current="page"]::before,
+  .site-contact[aria-current="page"]::before,
+  .site-menu a[aria-current="page"]::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    flex: 0 0 7px;
+    margin-right: 7px;
+    background: currentColor;
+    transform: rotate(45deg);
+  }
+
+  .site-contact {
+    gap: 10px;
+    border-bottom: 1px solid currentColor;
+  }
+
+  .site-menu { display: none; }
+
+  :is(.site-brand, .site-nav-desktop a, .site-contact, .site-menu summary, .site-menu a):focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 4px;
+    box-shadow: 0 0 0 7px var(--signal, #c8ff2e);
+  }
+
+  @media (max-width: 1180px) {
+    .site-header { grid-template-columns: auto 1fr auto; }
+    .site-nav-desktop, .site-contact { display: none; }
+    .site-menu { display: block; justify-self: end; }
+
+    .site-menu summary {
+      min-width: 92px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 10px 12px;
+      border: 1px solid currentColor;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .site-menu summary::-webkit-details-marker { display: none; }
+
+    .site-menu-icon,
+    .site-menu-icon::before {
+      width: 18px;
+      height: 2px;
+      display: block;
+      background: currentColor;
+      transition: transform 160ms ease;
+    }
+
+    .site-menu-icon { position: relative; }
+    .site-menu-icon::before { content: ""; position: absolute; transform: translateY(6px); }
+    .site-menu[open] .site-menu-icon { transform: translateY(3px) rotate(45deg); }
+    .site-menu[open] .site-menu-icon::before { transform: rotate(-90deg); }
+
+    .site-menu nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      max-height: calc(100svh - 68px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      display: grid;
+      padding: 14px clamp(18px, 4vw, 64px) 22px;
+      border-bottom: 1px solid var(--line, rgba(21, 23, 20, .22));
+      background: var(--paper, #efede6);
+      box-shadow: 0 18px 24px rgba(21, 23, 20, .12);
+    }
+
+    .site-menu a {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      padding: 8px 4px;
+      border-bottom: 1px solid var(--line, rgba(21, 23, 20, .22));
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .site-header { min-height: 68px; padding-inline: 16px; }
+    .site-brand { font-size: 2rem; }
+    .site-menu nav { max-height: calc(100svh - 68px); padding-inline: 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skip-link, .site-menu-icon, .site-menu-icon::before { transition: none; }
+  }
+</style>

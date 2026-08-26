@@ -147,6 +147,19 @@ test('links internos resolvem, usam minúsculas e barra final', () => {
   }
 })
 
+test('navegação compartilhada marca a rota ativa e mantém fallback móvel nas nove páginas', () => {
+  for (const route of routes) {
+    const html = htmlFor(route)
+    assert.match(html, /<header\b[^>]*class=["'][^"']*site-header/)
+    assert.match(html, /<details\b[^>]*class=["'][^"']*site-menu/)
+    assert.match(html, /<summary\b[^>]*aria-controls=["']site-navigation["'][^>]*aria-expanded=["']false["']/)
+
+    const escaped = route.path.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const currentLinks = [...html.matchAll(new RegExp(`<a\\b[^>]*href=["']${escaped}["'][^>]*aria-current=["']page["']`, 'g'))]
+    assert.ok(currentLinks.length >= 1, `${route.path} sem indicação de rota ativa`)
+  }
+})
+
 test('rodapé funciona como mapa completo em todas as páginas', () => {
   const expectedLinks = [
     '/',

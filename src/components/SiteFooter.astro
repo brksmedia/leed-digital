@@ -42,6 +42,9 @@ import { FOOTER_GROUPS, SITE } from '../config/site'
   }
 
   .footer-brand {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
     color: inherit;
     font-size: clamp(2rem, 3vw, 3rem);
     font-weight: 700;
@@ -110,8 +113,11 @@ import { FOOTER_GROUPS, SITE } from '../config/site'
 
   .footer-group a:focus-visible {
     color: var(--paper-bright, #f8f6ef);
-    outline: 3px solid var(--blue, #1557ff);
+    outline: 3px solid currentColor;
     outline-offset: 4px;
+    box-shadow: 0 0 0 7px var(--blue, #1557ff);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
   }
 
   @media (max-width: 900px) {
@@ -122,6 +128,8 @@ import { FOOTER_GROUPS, SITE } from '../config/site'
   @media (max-width: 620px) {
     .footer-map { grid-template-columns: 1fr; gap: 42px; }
     .footer-group h2 { margin-bottom: 20px; }
+    .footer-group ul { gap: 4px; }
+    .footer-group a { min-height: 44px; display: inline-flex; align-items: center; padding-block: 8px; }
   }
 
   @media (prefers-reduced-motion: reduce) {

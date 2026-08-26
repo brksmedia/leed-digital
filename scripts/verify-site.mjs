@@ -60,7 +60,7 @@ const defaultBuildEnv = { ...process.env }
 delete defaultBuildEnv.INCLUDE_DRAFTS
 
 try {
-  run(process.execPath, ['--test', 'tests/contact-form.test.mjs', 'tests/content-source.test.mjs', 'tests/insight-id.test.mjs'])
+  run(process.execPath, ['--test', 'tests/contact-form.test.mjs', 'tests/content-source.test.mjs', 'tests/insight-id.test.mjs', 'tests/ui-ux.test.mjs'])
   if (existsSync(invalidFixture)) throw new Error('fixture inválida já existe; cleanup recusado')
   writeFileSync(invalidFixture, draftFixtureContent, { flag: 'wx' })
   invalidFixtureCreated = true

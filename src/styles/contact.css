@@ -298,6 +298,28 @@ body {
   background: rgba(24, 87, 255, 0.06);
 }
 
+.contact-field input:focus-visible,
+.contact-field select:focus-visible,
+.contact-field textarea:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 7px var(--contact-lime);
+}
+
+.contact-form-result:focus-visible,
+.contact-form-error:focus-visible {
+  outline: 3px dashed currentColor;
+  outline-offset: 6px;
+}
+
+.contact-page :is(a, button):focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 7px var(--contact-lime);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
 .contact-submit {
   grid-column: 1 / -1;
   width: min(320px, 100%);

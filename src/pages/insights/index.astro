@@ -17,9 +17,9 @@ const posts = (await getCollection('insights', ({ data }) => !data.draft)).sort(
 <BaseLayout title={title} description={description} path={path} jsonLd={breadcrumbJsonLd(crumbs)}>
   <Breadcrumbs items={[{ label: 'Início', href: '/' }, { label: 'Insights' }]} />
   <EditorialPage eyebrow="INSIGHTS / OPERAÇÕES" title="Perguntas melhores antes de escolher tecnologia." intro="Textos para founders e lideranças de operações avaliarem sistemas, dados e agentes de IA a partir do trabalho real, sem atalhos de linguagem.">
-    <section class="content-grid">
+    <section class:list={['content-grid', { 'content-grid--empty': posts.length === 0 }]}>
       {posts.length === 0 && (
-        <article class="content-card wide">
+        <article class="content-card content-card--empty">
           <span class="number-label">STATUS / REVISÃO</span>
           <h2>Conteúdos em validação editorial</h2>
           <p>Os primeiros textos estão preparados localmente e serão listados aqui somente depois da revisão factual e editorial.</p>

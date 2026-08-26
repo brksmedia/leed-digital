@@ -10,9 +10,9 @@ const {
 } = Astro.props
 ---
 
-<section class="page-cta" aria-labelledby="page-cta-title">
+<section class="page-cta" aria-labelledby="page-cta-title" aria-describedby="page-cta-description">
   <p class="eyebrow">PRÓXIMO PASSO</p>
   <h2 id="page-cta-title">{title}</h2>
-  <p>{text}</p>
+  <p id="page-cta-description">{text}</p>
   <a class="button-link" href="/contact/">Conversar sobre o projeto <span aria-hidden="true">↗</span></a>
 </section>
