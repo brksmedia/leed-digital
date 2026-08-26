@@ -30,17 +30,28 @@ const isCurrent = (href: string) => currentPath === href
     ))}
   </nav>
 
-  <a class="site-contact" href="/contact/" aria-current={isCurrent('/contact/') ? 'page' : undefined}>
+  <a
+    class="site-contact"
+    href="/contact/"
+    aria-current={isCurrent('/contact/') ? 'page' : undefined}
+    data-contact-cta={home ? 'header' : undefined}
+  >
     Contato <span aria-hidden="true">↗</span>
   </a>
 
   <details class="site-menu">
-    <summary aria-controls="site-navigation" aria-expanded="false">
+    <summary aria-controls="site-navigation">
       <span>Menu</span><span class="site-menu-icon" aria-hidden="true"></span>
     </summary>
     <nav id="site-navigation" aria-label="Navegação móvel">
       {[...navItems, { href: '/contact/', label: 'Contato' }].map((item) => (
-        <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+        <a
+          href={item.href}
+          aria-current={isCurrent(item.href) ? 'page' : undefined}
+          data-contact-cta={home && item.href === '/contact/' ? 'header' : undefined}
+        >
+          {item.label}
+        </a>
       ))}
     </nav>
   </details>

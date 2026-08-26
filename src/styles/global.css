@@ -14,7 +14,7 @@
 
 * { box-sizing: border-box; }
 html { background: var(--paper); color: var(--ink); scroll-behavior: smooth; }
-body { margin: 0; overflow-x: clip; font-family: var(--sans); }
+body { margin: 0; font-family: var(--sans); }
 a { color: inherit; text-underline-offset: 0.2em; }
 button, input, select, textarea { font: inherit; }
 :focus-visible { outline: 3px solid currentColor; outline-offset: 4px; box-shadow: 0 0 0 7px var(--signal); }

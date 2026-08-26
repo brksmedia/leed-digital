@@ -27,7 +27,9 @@ test('navegação compartilhada cobre as nove rotas e expõe menu móvel progres
   }
   assert.match(home, /<SiteNav\b/)
   assert.match(nav, /<details\b[^>]*class="site-menu"/)
-  assert.match(nav, /<summary\b[^>]*aria-controls="site-navigation"[^>]*aria-expanded=/)
+  const summary = nav.match(/<summary\b[^>]*aria-controls="site-navigation"[^>]*>/)?.[0]
+  assert.ok(summary, 'summary do menu móvel ausente')
+  assert.doesNotMatch(summary, /aria-expanded=/, 'HTML sem JS deve confiar no estado nativo de details')
   assert.match(nav, /id="site-navigation"/)
   assert.match(nav, /aria-current=/)
   assert.match(nav, /keydown[\s\S]*Escape/)
@@ -36,6 +38,8 @@ test('navegação compartilhada cobre as nove rotas e expõe menu móvel progres
   assert.match(nav, /\.focus\(\)/)
   assert.match(nav, /addEventListener\(['"]toggle['"]/)
   assert.match(nav, /setAttribute\(['"]aria-expanded['"]/)
+  assert.match(nav, /addEventListener\(['"]toggle['"],\s*syncExpanded\)/)
+  assert.match(nav, /syncExpanded\(\)\s*\n\s*\}\)/, 'enhancement deve inicializar aria-expanded ao carregar')
   assert.match(nav, /links\.forEach[\s\S]*addEventListener\(['"]click['"],\s*closeMenu\)/)
   assert.match(nav, /summary[\s\S]*queueMicrotask\(syncExpanded\)/)
   assert.match(nav, /removeAttribute\(['"]open['"]\)[\s\S]*syncExpanded\(\)/)
@@ -112,10 +116,9 @@ test('footer mantém grupos e oferece alvos móveis de pelo menos 44px', () => {
   assert.match(footer, /\.footer-brand[^}]*min-height:\s*44px/)
 })
 
-test('foco global usa forma além de cor e layout evita overflow horizontal', () => {
+test('foco global usa forma além de cor', () => {
   const css = source('src/styles/global.css')
 
   assert.match(css, /:focus-visible\s*\{[^}]*outline:[^}]*box-shadow:/)
   assert.match(css, /a:focus-visible\s*\{[^}]*text-decoration:/)
-  assert.match(css, /body\s*\{[^}]*overflow-x:\s*clip/)
 })

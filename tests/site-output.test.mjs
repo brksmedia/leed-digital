@@ -152,11 +152,34 @@ test('navegação compartilhada marca a rota ativa e mantém fallback móvel nas
     const html = htmlFor(route)
     assert.match(html, /<header\b[^>]*class=["'][^"']*site-header/)
     assert.match(html, /<details\b[^>]*class=["'][^"']*site-menu/)
-    assert.match(html, /<summary\b[^>]*aria-controls=["']site-navigation["'][^>]*aria-expanded=["']false["']/)
+    const summary = matchOne(html, /<summary\b[^>]*aria-controls=["']site-navigation["'][^>]*>/gi, `${route.path} summary`)[0]
+    assert.doesNotMatch(summary, /aria-expanded=/i, `${route.path}: fallback sem JS não deve contradizer details`)
+    assert.match(html, /setAttribute\([`"']aria-expanded[`"']/, `${route.path}: enhancement não inicializa aria-expanded`)
+    assert.match(html, /addEventListener\([`"']toggle[`"'],\s*\w+\)/, `${route.path}: enhancement não sincroniza toggle`)
 
     const escaped = route.path.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
     const currentLinks = [...html.matchAll(new RegExp(`<a\\b[^>]*href=["']${escaped}["'][^>]*aria-current=["']page["']`, 'g'))]
     assert.ok(currentLinks.length >= 1, `${route.path} sem indicação de rota ativa`)
+  }
+})
+
+test('home restaura tracking de Contato no header desktop e móvel sem expandir para outras rotas', () => {
+  const homeHtml = htmlFor(routes.find((route) => route.path === '/'))
+  const homeHeader = matchOne(homeHtml, /<header\b[^>]*class=["'][^"']*site-header[^"']*["'][^>]*>([\s\S]*?)<\/header>/gi, 'home header')[1]
+  const headerContactLinks = [...homeHeader.matchAll(/<a\b[^>]*href=["']\/contact\/["'][^>]*>/gi)]
+
+  assert.equal(headerContactLinks.length, 2, 'home deve ter links Contato de desktop e mobile no header')
+  for (const link of headerContactLinks) {
+    assert.match(link[0], /data-contact-cta=["']header["']/i)
+  }
+
+  const trackingLocations = [...homeHtml.matchAll(/data-contact-cta=["']([^"']+)["']/gi)].map((match) => match[1]).sort()
+  assert.deepEqual(trackingLocations, ['footer', 'header', 'header', 'hero'])
+
+  for (const route of routes.filter((route) => route.path !== '/')) {
+    const html = htmlFor(route)
+    const header = matchOne(html, /<header\b[^>]*class=["'][^"']*site-header[^"']*["'][^>]*>([\s\S]*?)<\/header>/gi, `${route.path} header`)[1]
+    assert.doesNotMatch(header, /data-contact-cta=/i, `${route.path}: tracking de header deve existir somente na home`)
   }
 })
 
