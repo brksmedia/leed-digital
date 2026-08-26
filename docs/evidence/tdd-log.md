@@ -179,3 +179,23 @@ npm run check && npm run lint && npm run build && npm test && npm audit
 ```
 
 Saída: check/lint/build aprovados; suíte unitária 5/5 e suíte de build/servidor 9/9; audit 0. Os artigos continuam gerando HTML local para revisão, com `draft: true`, `noindex, nofollow`, `dateCreated` e exclusão de sitemap, RSS e `llms.txt` até aprovação.
+
+### RED 11: conversão do formulário não alcançava `window.gtag`
+
+Comando:
+
+```text
+node --test tests/site-output.test.mjs
+```
+
+Saída: 7/8 testes aprovados. A asserção nova mostrou que `define:vars` envolvia `function gtag()` em um IIFE, enquanto a ilha React chama `window.gtag`, impedindo o disparo da conversão após sucesso.
+
+### GREEN 11: `gtag` publicado explicitamente no escopo global
+
+Comando:
+
+```text
+npm run check && npm run lint && npm run build && npm test && npm audit
+```
+
+Saída: check e lint aprovados; build estático com 13 páginas; suíte unitária 5/5; suíte de build/servidor 9/9; audit com 0 vulnerabilidades. O tracking legado agora define `window.gtag` explicitamente e o teste do HTML compilado protege a integração com a ilha React.

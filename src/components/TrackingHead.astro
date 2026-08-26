@@ -6,9 +6,9 @@ import { SITE } from '../config/site'
 <script is:inline define:vars={{ adsId: SITE.adsId }}>
   /* eslint-disable prefer-rest-params */
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', adsId);
+  window.gtag = function gtag(){ window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', adsId);
 </script>
 <script is:inline define:vars={{ gtmId: SITE.gtmId }}>
   /* eslint-disable no-var */

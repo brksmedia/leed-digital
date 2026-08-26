@@ -74,6 +74,7 @@ test('tracking legado fica restrito às rotas já mensuradas e o formulário inf
 
   const contactHtml = htmlFor(routes.find((route) => route.path === '/contact/'))
   assert.match(contactHtml, /processados pelo Formspree/i)
+  assert.match(contactHtml, /window\.gtag\s*=\s*function\b/i, 'gtag precisa estar disponível para a ilha React')
   assert.match(contactHtml, /<form\b[^>]*\bmethod=["']post["']/i, 'formulário sem fallback POST')
   assert.match(contactHtml, /<form\b[^>]*\baction=["']https:\/\/formspree\.io\/f\/mwvwaypr["']/i, 'formulário sem action segura')
 })
