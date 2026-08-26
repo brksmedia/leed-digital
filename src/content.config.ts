@@ -1,16 +1,20 @@
 import { defineCollection } from 'astro:content'
 import { glob } from 'astro/loaders'
 import { z } from 'astro/zod'
+import { insightIdFromEntry } from './lib/insight-id'
 
-const insightSchema = z.object({
+const insightBaseSchema = z.object({
   title: z.string().min(20),
   description: z.string().min(70),
   publishedAt: z.coerce.date(),
   updatedAt: z.coerce.date().optional(),
-  status: z.literal('review'),
-  draft: z.literal(true),
   topics: z.array(z.string()).min(2),
 })
+
+const insightSchema = z.discriminatedUnion('draft', [
+  insightBaseSchema.extend({ status: z.literal('review'), draft: z.literal(true) }),
+  insightBaseSchema.extend({ status: z.literal('published'), draft: z.literal(false) }),
+])
 
 const caseSchema = z.object({
   title: z.string(),
@@ -20,7 +24,11 @@ const caseSchema = z.object({
 })
 
 const insights = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/insights' }),
+  loader: glob({
+    pattern: '**/*.md',
+    base: './src/content/insights',
+    generateId: ({ entry }) => insightIdFromEntry(entry),
+  }),
   schema: insightSchema,
 })
 

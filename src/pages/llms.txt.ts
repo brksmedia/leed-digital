@@ -1,11 +1,12 @@
 import { getCollection } from 'astro:content'
 import { SITE } from '../config/site'
+import { insightUrlFromId } from '../lib/insight-id'
 
 export async function GET() {
   const posts = await getCollection('insights', ({ data }) => !data.draft)
   const insightLinks = posts
     .sort((a, b) => a.data.title.localeCompare(b.data.title, 'pt-BR'))
-    .map((post) => `- [${post.data.title}](${SITE.origin}/insights/${post.id}/): ${post.data.description}`)
+    .map((post) => `- [${post.data.title}](${insightUrlFromId(post.id, SITE.origin)}): ${post.data.description}`)
     .join('\n')
 
   const body = `# LEED Digital

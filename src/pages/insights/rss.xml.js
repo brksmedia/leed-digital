@@ -1,5 +1,6 @@
 import rss from '@astrojs/rss'
 import { getCollection } from 'astro:content'
+import { insightPathFromId } from '../../lib/insight-id'
 
 export async function GET(context) {
   const posts = (await getCollection('insights', ({ data }) => !data.draft)).sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
@@ -13,7 +14,7 @@ export async function GET(context) {
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.publishedAt,
-      link: `/insights/${post.id}/`,
+      link: insightPathFromId(post.id),
     })),
   })
 }

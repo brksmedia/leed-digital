@@ -25,6 +25,10 @@ INCLUDE_DRAFTS=true npm run preview
 
 O resultado fica em `dist-review/`. Os artigos draft mantêm `noindex, nofollow`, status de revisão e nota editorial visível. Não publicar nem fazer deploy de `dist-review`; esse artefato existe somente para revisão local. Qualquer valor diferente da string exata `true` mantém os drafts excluídos.
 
+Para publicar um insight após aprovação factual e editorial, altere em conjunto `status: review` para `status: published` e `draft: true` para `draft: false`. O schema rejeita combinações intermediárias. Um conteúdo publicado gera rota indexável, metadata de publicação e inclusão na listagem de insights, sitemap, RSS e `llms.txt`.
+
+Nomes de arquivos e diretórios em `src/content/insights/` devem usar apenas letras minúsculas ASCII (`a-z`), números e hífens, sem espaços, acentos ou caracteres reservados. O build falha explicitamente quando essa convenção não é atendida, evitando slugs ambíguos ou colisões silenciosas.
+
 ## Comandos
 
 ```bash
@@ -36,7 +40,7 @@ npm test
 npm run preview
 ```
 
-`npm test` verifica o formulário com `fetch` simulado (sem chamada ao Formspree), collections, HTML estático, metadata, links, JSON-LD, arquivos de discovery, rotas do preview, 404 real e os contratos separados dos builds padrão e de revisão.
+`npm test` verifica o formulário com `fetch` simulado (sem chamada ao Formspree), collections, HTML estático, metadata, links, JSON-LD, arquivos de discovery, rotas do preview, 404 real e os contratos separados de draft, revisão e publicação. O fluxo publicado usa uma fixture temporária removida em `finally`; nenhum artigo fictício permanece no conteúdo.
 
 ## Estrutura
 

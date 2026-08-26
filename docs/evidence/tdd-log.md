@@ -231,3 +231,47 @@ INCLUDE_DRAFTS=true npm test
 ```
 
 Saída RED: 8/9 testes do build padrão passaram; o subprocesso de preview herdou a variável e procurou `dist-review` antes da fase de revisão. No GREEN, o runner passou o ambiente sem `INCLUDE_DRAFTS` tanto ao build quanto aos testes/preview padrão; a mesma execução adversarial passou e `dist-review` foi removido ao final.
+
+### RED 14: conteúdo aprovado não podia se tornar publicável
+
+Comando:
+
+```text
+npm test
+```
+
+Saída: os builds padrão e de revisão passaram, mas o build da fixture temporária falhou no schema porque `status` aceitava somente `review` e `draft` aceitava somente `true`. Isso reproduziu o bloqueio antes de alterar a implementação.
+
+### GREEN 14: estados editoriais discriminados e publicação verificável
+
+Comando:
+
+```text
+npm test
+```
+
+Saída: 5/5 testes de fonte/formulário, 9/9 do build padrão, 2/2 do build de revisão e 2/2 da fixture publicada. A publicação temporária gerou rota sem `noindex`, sem linguagem de rascunho, com `datePublished`, e apareceu na listagem, sitemap, RSS e `llms.txt`. Drafts continuaram fora desses canais no modo de revisão, e todos os arquivos temporários foram removidos em `finally`.
+
+### RED/GREEN 15: frontmatter YAML comentado no sitemap
+
+Comando RED:
+
+```text
+npm test
+```
+
+Saída RED: 1/2 testes do build de revisão passou. Uma fixture draft aninhada com `draft: true # comentário` gerou corretamente sua rota protegida, mas vazou para o sitemap porque o filtro usava regex em vez de interpretar YAML.
+
+No GREEN, `astro.config.mjs` passou a analisar o frontmatter com o parser `yaml` declarado diretamente. A suíte passou 5/5 + 9/9 + 2/2 + 2/2, removeu a URL comentada/aninhada do sitemap e limpou fixture e builds temporários em `finally`.
+
+### RED/GREEN 16: caminhos locais e URLs canônicas divergentes
+
+Comando RED:
+
+```text
+npm test
+```
+
+Saída RED: 1/2 testes do build de revisão passou. A fixture draft em caminho aninhado com espaços e Unicode gerou rota protegida, mas sua URL percent-encoded vazou no sitemap porque o filtro comparava um pathname de `file:` e uma URL não canônica.
+
+No GREEN, `fileURLToPath()` passou a tratar o caminho local e um gerador de ID compartilhado passou a alimentar tanto o loader `glob` quanto o filtro do sitemap. `new URL()` produz a URL canônica codificada. A suíte voltou a 5/5 + 9/9 + 2/2 + 2/2, com cleanup integral.

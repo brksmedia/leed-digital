@@ -76,3 +76,7 @@ npm test
 A suíte cobre metadata, um H1 por rota, canonical, `lang`, links internos, JSON-LD, artifacts de discovery, formulário com requisição simulada, crawl local e 404 real.
 
 Para revisão explícita dos três drafts, `npm run build:review` define `INCLUDE_DRAFTS=true` e grava o resultado isolado em `dist-review/`. Essas páginas sempre incluem `noindex, nofollow` e nota editorial. Não publicar nem fazer deploy desse diretório. Sem o opt-in exato, drafts não geram arquivo ou rota.
+
+O schema editorial admite apenas dois estados coerentes: `status: review` com `draft: true`, ou `status: published` com `draft: false`. Ao ser aprovado, um insight publicado perde robots e linguagem de revisão, recebe `datePublished` no JSON-LD e entra na listagem, sitemap, RSS e `llms.txt`. A suíte comprova esse fluxo com uma fixture temporária, sem adicionar um artigo fictício à produção.
+
+Arquivos e diretórios de insights usam slugs canônicos restritos a letras minúsculas ASCII, números e hífens. O build valida essa regra antes de entregar os arquivos ao loader do Astro e falha explicitamente para segmentos vazios, caracteres reservados, espaços, acentos ou formas que poderiam colidir após normalização.

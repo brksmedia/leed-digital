@@ -4,6 +4,7 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro'
 import EditorialPage from '../../components/EditorialPage.astro'
 import PageCta from '../../components/PageCta.astro'
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import { insightPathFromId } from '../../lib/insight-id'
 import { breadcrumbJsonLd } from '../../lib/structured-data'
 
 const path = '/insights/'
@@ -29,7 +30,7 @@ const posts = (await getCollection('insights', ({ data }) => !data.draft)).sort(
           <span class="number-label">{String(index + 1).padStart(2, '0')} / ANÁLISE</span>
           <h2>{post.data.title}</h2>
           <p>{post.data.description}</p>
-          <a href={`/insights/${post.id}/`}>Ler insight</a>
+          <a href={insightPathFromId(post.id)}>Ler insight</a>
         </article>
       ))}
     </section>
