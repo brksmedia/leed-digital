@@ -239,7 +239,9 @@ const isCurrent = (href: string) => currentPath === href
       top: 100%;
       left: 0;
       right: 0;
-      max-height: calc(100svh - 68px);
+      gap: 0;
+      justify-content: stretch;
+      max-height: calc(100svh - 82px);
       overflow-y: auto;
       overscroll-behavior: contain;
       display: grid;
@@ -260,7 +262,7 @@ const isCurrent = (href: string) => currentPath === href
     }
   }
 
-  @media (max-width: 620px) {
+  @media (max-width: 740px) {
     .site-header { min-height: 68px; padding-inline: 16px; }
     .site-brand { font-size: 2rem; }
     .site-menu nav { max-height: calc(100svh - 68px); padding-inline: 16px; }
