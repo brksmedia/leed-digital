@@ -1,0 +1,12 @@
+---
+import { PRIMARY_NAV } from '../config/site'
+---
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<header class="site-header">
+  <a class="site-brand" href="/" aria-label="LEED Digital, página inicial">LEED<span>.</span></a>
+  <nav aria-label="Navegação principal">
+    {PRIMARY_NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+  </nav>
+  <a class="site-contact" href="/contact/">Contato <span aria-hidden="true">↗</span></a>
+</header>

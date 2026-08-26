@@ -1,0 +1,17 @@
+---
+import { SITE } from '../config/site'
+---
+
+<footer class="site-footer">
+  <div>
+    <a class="site-brand" href="/" aria-label="LEED Digital, página inicial">LEED<span>.</span></a>
+    <p>{SITE.positioning}</p>
+  </div>
+  <div class="footer-links">
+    <a href="/servicos/integracoes-e-dados/">Integrações e dados</a>
+    <a href="/casos/">Casos</a>
+    <a href="/insights/">Insights</a>
+    <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+  </div>
+  <p class="footer-meta">© 2026 LEED Digital</p>
+</footer>

@@ -1,34 +1,41 @@
 # LEED Digital
 
-Site institucional da LEED, construído como projeto Vite multipágina.
+Site institucional em Astro, com saída estática completa para busca tradicional e respostas de IA. A única ilha React é o formulário de contato.
 
 ## Rotas
 
-- `/`: Home estática em `index.html`.
-- `/contact/`: página React em `contact/index.html`, montada por `src/contact-main.tsx`.
+- `/` e `/contact/`
+- `/sobre/` e `/como-trabalhamos/`
+- `/servicos/desenvolvimento-de-sistemas/`
+- `/servicos/agentes-de-ia/`
+- `/servicos/integracoes-e-dados/`
+- `/casos/`
+- `/insights/` e três artigos iniciais
+
+Os três insights permanecem `draft: true`: geram HTML local com `noindex`, mas ficam fora do índice, sitemap, RSS e `llms.txt` até aprovação. Casos não validados permanecem em `src/content/cases/` com `draft: true` e não geram rota pública.
 
 ## Comandos
 
 ```bash
-npm run dev
-npm run build
+npm ci
+npm run check
 npm run lint
+npm run build
 npm test
+npm run preview
 ```
 
-`npm test` deve ser executado depois do build e verifica metadata, sitemap, redirects, arquivos públicos, links internos essenciais e requisitos estruturais do formulário.
+`npm test` verifica o formulário com `fetch` simulado (sem chamada ao Formspree), collections, HTML estático, metadata, links, JSON-LD, arquivos de discovery, rotas do preview e 404 real.
 
-## Estrutura relevante
+## Estrutura
 
-- `index.html`: Home e seus estilos/scripts.
-- `src/pages/ContactPage.tsx`: comportamento da página de contato.
-- `src/pages/contact-page.css`: estilos exclusivos do contato.
-- `public/robots.txt`: política de rastreamento.
-- `public/sitemap.xml`: sitemap técnico.
-- `public/_redirects`: redirects do Cloudflare Pages.
-- `public/_headers`: headers básicos de segurança.
-- `docs/site-foundation.md`: sitemap, especificação por página, critérios de aceite e pendências.
+- `astro.config.mjs`: output estático, domínio canônico, trailing slash e sitemap.
+- `src/layouts/` e `src/components/`: layouts, navegação, rodapé, metadata, JSON-LD e CTA reutilizáveis.
+- `src/content/`: collections de insights e casos.
+- `src/pages/`: rotas estáticas, RSS e `llms.txt`.
+- `tests/`: checks unitários, de build e de servidor local.
+- `docs/`: fundação editorial, prompts, medição, inventário e bloqueios.
 
 ## Publicação
 
-O Cloudflare Pages publica automaticamente a branch `main`. Não faça push para `main` nem altere configuração de produção sem aprovação explícita.
+O repositório documenta Cloudflare Pages com auto-deploy a partir de `main`. Esta branch é apenas local: push, PR, merge e deploy não fazem parte desta execução. Revise textos, schemas e diff antes de autorizar qualquer publicação.

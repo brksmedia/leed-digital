@@ -1,0 +1,26 @@
+---
+import Breadcrumbs from '../../../components/Breadcrumbs.astro'
+import EditorialPage from '../../../components/EditorialPage.astro'
+import PageCta from '../../../components/PageCta.astro'
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import { breadcrumbJsonLd, serviceJsonLd } from '../../../lib/structured-data'
+
+const path = '/servicos/integracoes-e-dados/'
+const title = 'Integrações e dados operacionais | LEED Digital'
+const description = 'Integrações e estruturas de dados que conectam ferramentas, reduzem reconciliação manual e criam contexto confiável para sistemas e agentes de IA.'
+const crumbs = [{ label: 'Início', path: '/' }, { label: 'Serviços', path: '/#capabilities' }, { label: 'Integrações e dados', path }]
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={[serviceJsonLd('Integrações e dados operacionais', description, path), breadcrumbJsonLd(crumbs)]}>
+  <Breadcrumbs items={[{ label: 'Início', href: '/' }, { label: 'Serviços', href: '/#capabilities' }, { label: 'Integrações e dados' }]} />
+  <EditorialPage eyebrow="SERVIÇO / INTEGRAÇÕES E DADOS" title="Conectar sistemas não basta. O contexto precisa permanecer coerente." intro="Integrações úteis definem origem, significado, frequência, falhas e responsabilidade. Essa base permite que interfaces e agentes trabalhem com o mesmo estado operacional.">
+    <section class="content-grid">
+      <article class="content-card"><span class="number-label">01</span><h2>Mapeamento de dados</h2><p>Identificamos onde cada informação nasce, como muda e qual sistema deve ser sua referência.</p></article>
+      <article class="content-card"><span class="number-label">02</span><h2>Integrações resilientes</h2><p>Fluxos com validação, repetição segura, alertas e tratamento explícito de inconsistências.</p></article>
+      <article class="content-card"><span class="number-label">03</span><h2>Camadas operacionais</h2><p>Estruturas que reúnem dados necessários para uma decisão sem duplicar lógica em cada ferramenta.</p></article>
+      <article class="content-card wide"><span class="number-label">SINAL</span><h3>A equipe reconcilia versões manualmente</h3><p>Se reuniões começam pela pergunta “qual número está certo?”, o problema não é apenas visualização. É definição, origem e sincronização.</p></article>
+      <article class="content-card wide"><span class="number-label">RESULTADO TÉCNICO</span><h3>Um estado compreensível da operação</h3><p>O objetivo é reduzir ambiguidades: eventos rastreáveis, erros visíveis e contratos claros entre ferramentas.</p></article>
+    </section>
+  </EditorialPage>
+  <PageCta title="Os dados da operação contam histórias diferentes?" />
+</BaseLayout>

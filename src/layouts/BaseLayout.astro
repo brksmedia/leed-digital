@@ -1,0 +1,42 @@
+---
+import JsonLd from '../components/JsonLd.astro'
+import Metadata from '../components/Metadata.astro'
+import SiteFooter from '../components/SiteFooter.astro'
+import SiteNav from '../components/SiteNav.astro'
+import TrackingBody from '../components/TrackingBody.astro'
+import TrackingHead from '../components/TrackingHead.astro'
+import { SITE } from '../config/site'
+import '../styles/global.css'
+
+interface Props {
+  title: string
+  description: string
+  path: string
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[]
+  type?: 'website' | 'article'
+  tracking?: boolean
+  robots?: string
+}
+
+const { title, description, path, jsonLd = [], type = 'website', tracking = false, robots } = Astro.props
+---
+
+<!doctype html>
+<html lang={SITE.locale}>
+  <head>
+    <Metadata title={title} description={description} path={path} type={type} robots={robots} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    {tracking ? <TrackingHead /> : null}
+    <JsonLd data={jsonLd} />
+  </head>
+  <body>
+    {tracking ? <TrackingBody /> : null}
+    <SiteNav />
+    <main id="conteudo" tabindex="-1">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

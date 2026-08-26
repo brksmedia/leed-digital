@@ -1,0 +1,18 @@
+---
+interface Props {
+  title?: string
+  text?: string
+}
+
+const {
+  title = 'Qual parte da operação precisa funcionar melhor?',
+  text = 'Conte o contexto. A conversa começa pelo processo, pelas decisões e pelos dados que precisam se conectar.',
+} = Astro.props
+---
+
+<section class="page-cta" aria-labelledby="page-cta-title">
+  <p class="eyebrow">PRÓXIMO PASSO</p>
+  <h2 id="page-cta-title">{title}</h2>
+  <p>{text}</p>
+  <a class="button-link" href="/contact/">Conversar sobre o projeto <span aria-hidden="true">↗</span></a>
+</section>

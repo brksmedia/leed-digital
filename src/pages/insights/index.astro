@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content'
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import EditorialPage from '../../components/EditorialPage.astro'
+import PageCta from '../../components/PageCta.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { breadcrumbJsonLd } from '../../lib/structured-data'
+
+const path = '/insights/'
+const title = 'Insights sobre sistemas e agentes de IA | LEED Digital'
+const description = 'Análises práticas da LEED Digital sobre sistemas próprios, automação, agentes de IA, integrações e desenho de operações empresariais.'
+const crumbs = [{ label: 'Início', path: '/' }, { label: 'Insights', path }]
+const posts = (await getCollection('insights', ({ data }) => !data.draft)).sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={breadcrumbJsonLd(crumbs)}>
+  <Breadcrumbs items={[{ label: 'Início', href: '/' }, { label: 'Insights' }]} />
+  <EditorialPage eyebrow="INSIGHTS / OPERAÇÕES" title="Perguntas melhores antes de escolher tecnologia." intro="Textos para founders e lideranças de operações avaliarem sistemas, dados e agentes de IA a partir do trabalho real, sem atalhos de linguagem.">
+    <section class="content-grid">
+      {posts.length === 0 && (
+        <article class="content-card wide">
+          <span class="number-label">STATUS / REVISÃO</span>
+          <h2>Conteúdos em validação editorial</h2>
+          <p>Os primeiros textos estão preparados localmente e serão listados aqui somente depois da revisão factual e editorial.</p>
+        </article>
+      )}
+      {posts.map((post, index) => (
+        <article class="content-card">
+          <span class="number-label">{String(index + 1).padStart(2, '0')} / ANÁLISE</span>
+          <h2>{post.data.title}</h2>
+          <p>{post.data.description}</p>
+          <a href={`/insights/${post.id}/`}>Ler insight</a>
+        </article>
+      ))}
+    </section>
+  </EditorialPage>
+  <PageCta title="Qual hipótese operacional precisa ser testada?" />
+</BaseLayout>

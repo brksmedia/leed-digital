@@ -1,0 +1,26 @@
+---
+import Breadcrumbs from '../../../components/Breadcrumbs.astro'
+import EditorialPage from '../../../components/EditorialPage.astro'
+import PageCta from '../../../components/PageCta.astro'
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import { breadcrumbJsonLd, serviceJsonLd } from '../../../lib/structured-data'
+
+const path = '/servicos/agentes-de-ia/'
+const title = 'Agentes de IA para operações | LEED Digital'
+const description = 'Agentes de IA com responsabilidades, dados, ferramentas, limites e supervisão definidos para apoiar operações empresariais complexas.'
+const crumbs = [{ label: 'Início', path: '/' }, { label: 'Serviços', path: '/#capabilities' }, { label: 'Agentes de IA', path }]
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={[serviceJsonLd('Agentes de IA para operações empresariais', description, path), breadcrumbJsonLd(crumbs)]}>
+  <Breadcrumbs items={[{ label: 'Início', href: '/' }, { label: 'Serviços', href: '/#capabilities' }, { label: 'Agentes de IA' }]} />
+  <EditorialPage eyebrow="SERVIÇO / AGENTES DE IA" title="Agentes úteis têm trabalho, contexto e limites claros." intro="Um agente operacional não é um chat genérico. Ele participa de um processo definido, consulta fontes autorizadas, usa ferramentas específicas e entrega ações que podem ser revisadas.">
+    <section class="content-grid">
+      <article class="content-card"><span class="number-label">01 / CONTEXTO</span><h2>Fontes confiáveis</h2><p>O agente recebe somente os dados necessários, com origem e atualização conhecidas.</p></article>
+      <article class="content-card"><span class="number-label">02 / AÇÃO</span><h2>Ferramentas delimitadas</h2><p>Cada integração corresponde a uma responsabilidade concreta, sem acesso amplo por conveniência.</p></article>
+      <article class="content-card"><span class="number-label">03 / CONTROLE</span><h2>Revisão por risco</h2><p>Ações sensíveis param para aprovação; eventos comuns seguem regras e ficam registrados.</p></article>
+      <article class="content-card wide"><span class="number-label">PROCESSO ADEQUADO</span><h3>Volume, linguagem e exceções analisáveis</h3><p>Agentes tendem a ajudar quando existe trabalho recorrente, parte da entrada é não estruturada e o resultado pode ser checado antes de causar impacto.</p><a href="/insights/processos-adequados-para-agentes-de-ia/">Ver critérios de avaliação</a></article>
+      <article class="content-card wide"><span class="number-label">ARQUITETURA</span><h3>Automação, agente e sistema não são sinônimos</h3><p>Cada abordagem resolve um tipo diferente de variabilidade. Misturá-las aumenta custo e reduz confiabilidade.</p><a href="/insights/automacao-agente-de-ia-e-sistema-operacional/">Entender as diferenças</a></article>
+    </section>
+  </EditorialPage>
+  <PageCta title="Existe uma decisão repetida que consome contexto demais?" />
+</BaseLayout>

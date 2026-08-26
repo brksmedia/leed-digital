@@ -1,0 +1,23 @@
+---
+import Metadata from '../components/Metadata.astro'
+import { SITE } from '../config/site'
+---
+
+<!doctype html>
+<html lang={SITE.locale}>
+  <head>
+    <Metadata title="Página não encontrada | LEED Digital" description="A página solicitada não existe. Volte ao início da LEED Digital ou navegue pelos serviços e insights disponíveis." path="/404.html" />
+    <meta name="robots" content="noindex" />
+    <style>
+      :root { color: #151714; background: #efede6; font-family: 'Instrument Sans', sans-serif; }
+      * { box-sizing: border-box; }
+      body { min-height: 100vh; margin: 0; display: grid; place-items: center; padding: 24px; }
+      main { width: min(100%, 760px); padding-top: 34px; border-top: 1px solid currentColor; }
+      h1 { margin: 0 0 24px; font-size: clamp(4rem, 14vw, 10rem); line-height: .82; letter-spacing: -.08em; }
+      p { max-width: 54ch; font-size: 1.15rem; line-height: 1.55; }
+      a { display: inline-block; min-height: 44px; margin-top: 22px; color: inherit; font-weight: 700; text-underline-offset: 5px; }
+      a:focus-visible { outline: 3px solid #1557ff; outline-offset: 4px; }
+    </style>
+  </head>
+  <body><main><h1>404</h1><p>A página que você procurou não existe ou mudou de endereço.</p><a href="/">Voltar para a página inicial</a></main></body>
+</html>

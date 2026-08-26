@@ -1,0 +1,23 @@
+---
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import EditorialPage from '../../components/EditorialPage.astro'
+import PageCta from '../../components/PageCta.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { breadcrumbJsonLd } from '../../lib/structured-data'
+
+const path = '/casos/'
+const title = 'Casos | LEED Digital'
+const description = 'Área de casos da LEED Digital reservada para projetos que tenham contexto, autorização e evidências verificadas antes da publicação.'
+const crumbs = [{ label: 'Início', path: '/' }, { label: 'Casos', path }]
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={breadcrumbJsonLd(crumbs)}>
+  <Breadcrumbs items={[{ label: 'Início', href: '/' }, { label: 'Casos' }]} />
+  <EditorialPage eyebrow="CASOS / EVIDÊNCIA" title="Prova pública exige contexto verificável." intro="Ainda não publicamos estudos de caso nesta área. Um projeto só entra aqui depois de validar autorização, situação inicial, escopo, evidências e linguagem de resultado.">
+    <section class="content-grid">
+      <article class="content-card wide"><span class="number-label">CRITÉRIO / 01</span><h2>Sem métricas isoladas</h2><p>Números precisam de fonte, período, definição e contexto. Sem isso, não ajudam uma empresa a avaliar se a experiência é relevante para sua operação.</p></article>
+      <article class="content-card wide"><span class="number-label">CRITÉRIO / 02</span><h2>Sem cliente implícito</h2><p>Exemplos conceituais de interface ou arquitetura não são apresentados como trabalho entregue. Cases futuros serão identificados de forma honesta e autorizada.</p></article>
+    </section>
+  </EditorialPage>
+  <PageCta text="Se você quer discutir um processo específico, descreva o contexto atual. A conversa não depende de uma promessa genérica de resultado." />
+</BaseLayout>

@@ -1,0 +1,26 @@
+---
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import EditorialPage from '../../components/EditorialPage.astro'
+import PageCta from '../../components/PageCta.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { breadcrumbJsonLd } from '../../lib/structured-data'
+
+const path = '/como-trabalhamos/'
+const title = 'Como trabalhamos | LEED Digital'
+const description = 'Entenda como a LEED Digital investiga processos, recorta riscos e constrói sistemas e agentes de IA com validação operacional.'
+const crumbs = [{ label: 'Início', path: '/' }, { label: 'Como trabalhamos', path }]
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={breadcrumbJsonLd(crumbs)}>
+  <Breadcrumbs items={[{ label: 'Início', href: '/' }, { label: 'Como trabalhamos' }]} />
+  <EditorialPage eyebrow="MÉTODO / DO PROCESSO AO SISTEMA" title="Construir o recorte certo antes de construir rápido." intro="Cada projeto parte do trabalho real: quem decide, quais dados existem, onde as exceções aparecem e o que precisa continuar sob controle humano.">
+    <section class="content-grid">
+      <article class="content-card"><span class="number-label">01 / DESCOBERTA</span><h2>Entender o fluxo</h2><p>Reunimos contexto, eventos, regras, ferramentas, gargalos e responsabilidades. A pergunta central é qual mudança operacional justificaria o sistema.</p></article>
+      <article class="content-card"><span class="number-label">02 / RECORTE</span><h2>Definir fronteiras</h2><p>Separamos o que deve ser regra determinística, interface, integração, análise por IA ou decisão humana. Também explicitamos o que não entra.</p></article>
+      <article class="content-card"><span class="number-label">03 / ENTREGA</span><h2>Validar em uso</h2><p>Construímos em incrementos verificáveis, com dados reais autorizados, critérios de aceite e feedback de quem opera o processo.</p></article>
+      <article class="content-card wide"><span class="number-label">04 / OPERAÇÃO</span><h2>Observar antes de ampliar autonomia</h2><p>Agentes de IA começam com responsabilidade estreita, logs e pontos de revisão. A autonomia só cresce quando qualidade, exceções e impacto são observáveis.</p></article>
+      <article class="content-card wide"><span class="number-label">05 / EVOLUÇÃO</span><h2>Tratar o lançamento como início</h2><p>Processos mudam, integrações quebram e regras ganham exceções. A arquitetura precisa permitir manutenção e aprendizado sem transformar a operação em caixa-preta.</p></article>
+    </section>
+  </EditorialPage>
+  <PageCta title="Há um processo difícil de enxergar por inteiro?" />
+</BaseLayout>

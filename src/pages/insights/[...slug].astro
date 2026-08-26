@@ -1,0 +1,52 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content'
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { SITE } from '../../config/site'
+import { breadcrumbJsonLd } from '../../lib/structured-data'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('insights')
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }))
+}
+
+interface Props {
+  post: CollectionEntry<'insights'>
+}
+
+const { post } = Astro.props
+const { Content } = await render(post)
+const path = `/insights/${post.id}/`
+const publishedAt = post.data.publishedAt.toISOString()
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  dateCreated: publishedAt,
+  dateModified: (post.data.updatedAt ?? post.data.publishedAt).toISOString(),
+  inLanguage: SITE.locale,
+  mainEntityOfPage: new URL(path, SITE.origin).href,
+  author: { '@type': 'Organization', name: SITE.name, url: `${SITE.origin}/` },
+  publisher: { '@type': 'Organization', name: SITE.name, url: `${SITE.origin}/` },
+}
+const crumbs = [{ label: 'Início', path: '/' }, { label: 'Insights', path: '/insights/' }, { label: post.data.title, path }]
+---
+
+<BaseLayout title={`${post.data.title} | LEED Digital`} description={post.data.description} path={path} type="article" robots="noindex, nofollow" jsonLd={[articleJsonLd, breadcrumbJsonLd(crumbs)]}>
+  <Breadcrumbs items={[{ label: 'Início', href: '/' }, { label: 'Insights', href: '/insights/' }, { label: post.data.title }]} />
+  <article>
+    <header class="editorial-hero">
+      <p class="eyebrow">INSIGHT / REVISÃO EDITORIAL</p>
+      <h1>{post.data.title}</h1>
+      <p class="editorial-intro">{post.data.description}</p>
+    </header>
+    <div class="editorial-content">
+      <div class="prose">
+        <div class="article-meta"><span>Rascunho preparado em {post.data.publishedAt.toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</span><span>Status: revisão editorial</span></div>
+        <p class="review-note"><strong>Nota editorial:</strong> conteúdo em revisão factual e editorial, excluído de sitemap, RSS e descoberta até aprovação.</p>
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

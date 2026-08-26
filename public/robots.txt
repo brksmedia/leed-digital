@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://leed.digital/sitemap.xml
+Sitemap: https://leed.digital/sitemap-index.xml

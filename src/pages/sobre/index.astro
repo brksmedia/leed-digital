@@ -1,0 +1,26 @@
+---
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import EditorialPage from '../../components/EditorialPage.astro'
+import PageCta from '../../components/PageCta.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { breadcrumbJsonLd } from '../../lib/structured-data'
+
+const path = '/sobre/'
+const title = 'Sobre a LEED Digital | Sistemas para operações'
+const description = 'Conheça o foco da LEED Digital em desenvolvimento de sistemas e agentes de IA para operações empresariais com processos complexos.'
+const crumbs = [{ label: 'Início', path: '/' }, { label: 'Sobre', path }]
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={breadcrumbJsonLd(crumbs)}>
+  <Breadcrumbs items={[{ label: 'Início', href: '/' }, { label: 'Sobre' }]} />
+  <EditorialPage eyebrow="SOBRE / LEED DIGITAL" title="Tecnologia começa por entender a operação." intro="A LEED Digital trabalha no encontro entre processos, software, dados e inteligência artificial. O objetivo é construir capacidade operacional, não adicionar mais uma ferramenta desconectada.">
+    <section class="content-grid">
+      <article class="content-card wide"><span class="number-label">01 / FOCO</span><h2>O que fazemos</h2><p>Desenvolvimento de sistemas e agentes de IA para operações empresariais. Isso inclui aplicações internas, integrações, camadas de dados e agentes com responsabilidades delimitadas, supervisão e rastreabilidade.</p></article>
+      <article class="content-card wide"><span class="number-label">02 / HIPÓTESE</span><h2>Para quem desenhamos</h2><p>Nossa hipótese inicial de foco são empresas brasileiras B2B de serviços, com 10 a 50 pessoas, processos complexos, dados dispersos e ferramentas desconectadas. A conversa costuma envolver founder, CEO, COO ou liderança de operações.</p></article>
+      <article class="content-card"><span class="number-label">03 / PRINCÍPIO</span><h3>Processo antes da interface</h3><p>Mapeamos decisões, exceções e responsabilidades antes de escolher telas, automações ou modelos.</p></article>
+      <article class="content-card"><span class="number-label">04 / PRINCÍPIO</span><h3>IA com limites claros</h3><p>Um agente útil sabe o que pode fazer, quando deve pedir revisão e quais dados sustentam cada ação.</p></article>
+      <article class="content-card"><span class="number-label">05 / PRINCÍPIO</span><h3>Evolução observável</h3><p>Software operacional precisa de registros, critérios e ciclos de melhoria para continuar confiável.</p></article>
+    </section>
+  </EditorialPage>
+  <PageCta />
+</BaseLayout>

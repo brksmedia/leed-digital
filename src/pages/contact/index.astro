@@ -1,0 +1,44 @@
+---
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import { ContactForm } from '../../components/ContactForm'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { breadcrumbJsonLd } from '../../lib/structured-data'
+import '../../styles/contact.css'
+
+const path = '/contact/'
+const title = 'Contato | LEED Digital'
+const description = 'Converse com a LEED Digital sobre desenvolvimento de sistemas, agentes de IA, integrações e dados para uma operação empresarial.'
+const crumbs = [{ label: 'Início', path: '/' }, { label: 'Contato', path }]
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={breadcrumbJsonLd(crumbs)} tracking>
+  <div class="contact-page">
+    <Breadcrumbs items={[{ label: 'Início', href: '/' }, { label: 'Contato' }]} />
+    <section class="contact-main" aria-labelledby="contact-title">
+      <aside class="contact-index" aria-hidden="true"><span>01</span><p>CONTATO / 2026</p></aside>
+      <div class="contact-content">
+        <header class="contact-intro">
+          <p class="contact-kicker">NOVO PROJETO / CONTATO</p>
+          <h1 id="contact-title">Conte o que precisa <span>funcionar melhor.</span></h1>
+          <p>Mostre como o trabalho acontece hoje, onde ele trava e o que precisa ganhar clareza. A resposta começa por entender o contexto.</p>
+          <i aria-hidden="true"></i>
+        </header>
+        <div class="contact-layout">
+          <ContactForm client:load />
+          <aside class="contact-sidebar" aria-labelledby="channels-title">
+            <section>
+              <p class="contact-kicker">CONTATO DIRETO</p>
+              <h2 id="channels-title">Prefere falar sem formulário?</h2>
+              <a class="contact-direct-link" href="mailto:info@leed.digital"><span class="contact-direct-icon" aria-hidden="true">@</span><span><small>EMAIL</small><strong>info@leed.digital</strong></span><span aria-hidden="true">↗</span></a>
+              <a class="contact-direct-link" href="https://wa.me/5511947276831?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20um%20sistema%20ou%20agente%20de%20IA." target="_blank" rel="noreferrer"><span class="contact-direct-icon" aria-hidden="true">W</span><span><small>WHATSAPP</small><strong>Iniciar conversa</strong></span><span aria-hidden="true">↗</span></a>
+            </section>
+            <section class="contact-next-steps">
+              <p class="contact-kicker">DEPOIS DO ENVIO</p>
+              <ol class="contact-steps" aria-label="Próximos passos"><li><span>01</span> Lemos o contexto</li><li><span>02</span> Recortamos o problema</li><li><span>03</span> Combinamos uma conversa</li></ol>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
