@@ -107,6 +107,15 @@ test('empty state de Insights ocupa a grade sem publicar drafts', () => {
   assert.doesNotMatch(insights, /INCLUDE_DRAFTS/)
 })
 
+test('empty state de Insights preserva largura total até o breakpoint de 900px', () => {
+  const css = source('src/styles/global.css')
+
+  assert.match(
+    css,
+    /@media \(max-width: 900px\)\s*\{[\s\S]*?\.content-card--empty\s*\{[^}]*grid-column:\s*1\s*\/\s*-1/,
+  )
+})
+
 test('CTA preserva composição e associa texto ao título com foco e quebra responsiva', () => {
   const cta = source('src/components/PageCta.astro')
   const css = source('src/styles/global.css')
