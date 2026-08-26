@@ -18,3 +18,30 @@ export const PRIMARY_NAV = [
   { href: '/insights/', label: 'Insights' },
   { href: '/sobre/', label: 'Sobre' },
 ] as const
+
+export const FOOTER_GROUPS = [
+  {
+    title: 'Soluções',
+    links: [
+      { href: '/servicos/desenvolvimento-de-sistemas/', label: 'Desenvolvimento de sistemas' },
+      { href: '/servicos/agentes-de-ia/', label: 'Agentes de IA' },
+      { href: '/servicos/integracoes-e-dados/', label: 'Integrações e dados' },
+    ],
+  },
+  {
+    title: 'Empresa',
+    links: [
+      { href: '/sobre/', label: 'Sobre' },
+      { href: '/como-trabalhamos/', label: 'Como trabalhamos' },
+      { href: '/casos/', label: 'Casos' },
+    ],
+  },
+  {
+    title: 'Conteúdo e contato',
+    links: [
+      { href: '/insights/', label: 'Insights' },
+      { href: '/contact/', label: 'Contato' },
+      { href: `mailto:${SITE.email}`, label: SITE.email },
+    ],
+  },
+] as const

@@ -147,6 +147,33 @@ test('links internos resolvem, usam minúsculas e barra final', () => {
   }
 })
 
+test('rodapé funciona como mapa completo em todas as páginas', () => {
+  const expectedLinks = [
+    '/',
+    '/servicos/desenvolvimento-de-sistemas/',
+    '/servicos/agentes-de-ia/',
+    '/servicos/integracoes-e-dados/',
+    '/sobre/',
+    '/como-trabalhamos/',
+    '/casos/',
+    '/insights/',
+    '/contact/',
+  ]
+
+  for (const route of routes) {
+    const html = htmlFor(route)
+    const footer = matchOne(html, /<footer\b[^>]*class=["'][^"']*site-footer[^"']*["'][^>]*>([\s\S]*?)<\/footer>/gi, `${route.path} rodapé`)[1]
+    for (const href of expectedLinks) {
+      const escaped = href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      assert.match(footer, new RegExp(`href=["']${escaped}["']`), `${route.path}: rodapé sem ${href}`)
+    }
+    assert.match(footer, />Soluções</)
+    assert.match(footer, />Empresa</)
+    assert.match(footer, />Conteúdo e contato</)
+    assert.match(footer, /mailto:info@leed\.digital/)
+  }
+})
+
 test('conteúdo público remove claims sem suporte e usa a marca canônica', () => {
   const publicHtml = routes.map(htmlFor).join('\n')
   for (const claim of ['98,4%', '98.4%', '>94%<', '−31%', '-31%', '>18<', 'um dia útil', '24 horas', 'LEED Ponto Digital']) {

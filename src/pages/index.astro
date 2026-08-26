@@ -1,6 +1,7 @@
 ---
 import JsonLd from '../components/JsonLd.astro'
 import Metadata from '../components/Metadata.astro'
+import SiteFooter from '../components/SiteFooter.astro'
 import TrackingBody from '../components/TrackingBody.astro'
 import TrackingHead from '../components/TrackingHead.astro'
 import { SITE } from '../config/site'
@@ -1736,6 +1737,8 @@ const structuredData = [
         </div>
       </section>
     </main>
+
+    <SiteFooter />
 
     <script is:inline>
       const clock = document.querySelector("#clock");
