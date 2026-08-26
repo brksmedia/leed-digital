@@ -45,6 +45,19 @@ test('navegação compartilhada cobre as nove rotas e expõe menu móvel progres
   assert.match(nav, /removeAttribute\(['"]open['"]\)[\s\S]*syncExpanded\(\)/)
 })
 
+test('painel do menu móvel ocupa o espaço disponível sem herdar distribuição global', () => {
+  const nav = source('src/components/SiteNav.astro')
+
+  assert.match(
+    nav,
+    /@media \(max-width: 1180px\)[\s\S]*?\.site-menu nav\s*\{[^}]*gap:\s*0;[^}]*justify-content:\s*stretch;[^}]*max-height:\s*calc\(100svh - 82px\);/,
+  )
+  assert.match(
+    nav,
+    /@media \(max-width: 740px\)[\s\S]*?\.site-menu nav\s*\{[^}]*max-height:\s*calc\(100svh - 68px\);/,
+  )
+})
+
 test('home mantém conteúdo reveal visível por padrão e possui recuperação quando observer não revela', () => {
   const home = source('src/pages/index.astro')
 
